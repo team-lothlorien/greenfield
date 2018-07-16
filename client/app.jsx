@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 
-class App extends React.component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,3 +61,5 @@ class App extends React.component {
     );
   }
 }
+
+ReactDOM.render(<App />, document.getElementById('app'));
