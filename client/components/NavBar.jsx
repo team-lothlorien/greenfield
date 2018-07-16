@@ -1,5 +1,5 @@
 
-const NavBar = (props) => {
+export default NavBar = (props) => {
 
   return (
     <div className="navWrapper">

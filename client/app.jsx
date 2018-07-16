@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
+import NavBar from './components/NavBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
