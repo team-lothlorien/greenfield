@@ -1,0 +1,19 @@
+{
+  "name": "whatsupdoc",
+  "version": "1.0.0",
+  "description": "Greenfield project - help patients find doctors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-lothlorien/greenfield.git"
+  },
+  "author": "team-lothlorien (Eric Meltzer, Peter Park, David Levy, Michael Garrigan)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-lothlorien/greenfield/issues"
+  },
+  "homepage": "https://github.com/team-lothlorien/greenfield#readme"
+}
