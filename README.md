@@ -1,6 +1,6 @@
 # Project Name
 
-> Hack reactor greenfield project - Helps patients find doctors
+> Hack Reactor greenfield project - Helps patients find doctors
 
 ## Team
 
