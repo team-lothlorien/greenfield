@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'Axios';
+import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
 class Search extends React.Component {
@@ -16,7 +16,7 @@ class Search extends React.Component {
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
