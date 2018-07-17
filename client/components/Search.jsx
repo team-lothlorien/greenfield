@@ -54,35 +54,31 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount FIRED');
     this.getConditions();
   }
 
 
 
   getConditions() {
-  }
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
     if (this.state.filterCurrentlySelected === 'Keyword') {
       axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
       .then((condition) => {
         this.setState({conditions: condition.data.data})
-        .catch(err => console.log(err));
-      });
+      })
+      .catch(err => console.log(err));
     } else if (this.state.filterCurrentlySelected === 'Symptoms') {
       axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
       .then((condition) => {
         this.setState({conditions: condition.data.data})
-        .catch(err => console.log(err));
-      });
+      })
+      .catch(err => console.log(err));
     } else if (this.state.filterCurrentlySelected === 'Specialties') {
-      console.log('axios called');
       axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
       .then((condition) => {
-        console.log(condition.data.data);
         this.setState({conditions: condition.data.data})
-        .catch(err => console.log(err));
-      });
+      })
+      .catch(err => console.log(err));
     } else if (this.state.filterCurrentlySelected === 'Language') {
       this.setState({
         conditions: languages
@@ -91,22 +87,10 @@ class Search extends React.Component {
       axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
       .then((condition) => {
         this.setState({conditions: condition.data.data})
-        .catch(err => console.log(err));
-      });
+      })
+      .catch(err => console.log(err));
     }
-
   }
-
-
-
-
-
-
-
-
-
-
-
 
   //***********AUTOSUGGEST**********************//
 

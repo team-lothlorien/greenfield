@@ -6,3 +6,5 @@ var DoctorList = (props) => {
     <div>{DoctorListEntries}</div>
   );
 };
+
+export default DoctorList;
