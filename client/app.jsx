@@ -20,6 +20,10 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
+  swapFav (){
+    
+  }
+
   takeUsToHomePage (event) {
     event.preventDefault();
     // do something to change info section
