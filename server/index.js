@@ -1,19 +1,10 @@
 const express = require('express');
-
 const axios = require('axios');
-
-const app = express();
 const bodyParser = require('body-parser');
 
+const app = express();
+
 let port = process.env.PORT || 3000;
-
-app.use(bodyParser.json()); // :D
-app.use(express.static(`${__dirname}/../client/`));
-
-
-app.listen(port, () => {
-  console.log(`Connected to port ${port}...`);
-});
 
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../client/`));
