@@ -35,9 +35,12 @@ class App extends React.Component {
     event.preventDefault();
     // do something to change info section
   }
-  handleSearch(filter, term, location) {
-    //make server request for doctor search
-    axios.get('/search');
+  handleSearch(event, filter, term, location) {
+    event.preventDefault();
+    
+    axios.get(`/search/${filter}/${term}/${location}`)
+      .then( response => console.log(response.data))
+      .catch( err => console.log(err))
   }
 
   componentDidMount() {

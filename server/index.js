@@ -10,8 +10,10 @@ app.use(bodyParser.json()); // :D
 app.use(express.static(`${__dirname}/../client/`));
 
 //returns search result of doctors array
-app.get('/search', (req, res) => {
-
+app.get('/search/:filter/:term/:location', (req, res) => {
+  console.log('in server GET');
+  console.log(req.params);
+  
 });
 //adds doc to favorites db
 app.post('/addFavorite', (req, res) => {
