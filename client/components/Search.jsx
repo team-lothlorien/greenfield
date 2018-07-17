@@ -61,6 +61,7 @@ class Search extends React.Component {
 
 
   getConditions() {
+  }
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
     if (this.state.filterCurrentlySelected === 'Keyword') {
       axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
@@ -93,6 +94,7 @@ class Search extends React.Component {
         .catch(err => console.log(err));
       });
     }
+
   }
 
 
@@ -194,7 +196,7 @@ class Search extends React.Component {
     return (
       <form
         onSubmit={event => {
-          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.term, this.state.location);
+          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.location);
           (event) => this.clearInputFields(event);
         }
         }
