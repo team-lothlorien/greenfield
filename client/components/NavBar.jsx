@@ -1,5 +1,5 @@
 
-export default NavBar = (props) => {
+var NavBar = (props) => {
 
   return (
     <div className="navWrapper">
@@ -11,10 +11,12 @@ export default NavBar = (props) => {
         className="favorites"
         onClick={event => {props.takeUsToFavoritesPage(event)}}>Favorites
       </span>
-      <span 
+      <span
         className="login"
         onClick={event => {props.takeUsToLoginPage(event)}}>Login/Signup
       </span>
     </div>
   );
 };
+
+export default NavBar;
