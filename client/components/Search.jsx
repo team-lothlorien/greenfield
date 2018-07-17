@@ -181,6 +181,7 @@ class Search extends React.Component {
     });
     return (
       <form
+        className="formSection"
         onSubmit={event => {
           this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.location);
           (event) => this.clearInputFields(event);

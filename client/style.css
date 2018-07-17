@@ -1,3 +1,35 @@
+
+h1 {
+  color: rgb(230, 156, 20);
+  font-family: 'Pacifico', cursive;
+  font-size: 8vw;
+}
+
+.navWrapper {
+  align-items: center;
+  background: rgb(83, 83, 238);
+  display: flex;
+  height: 160px;
+  justify-content: space-evenly;
+}
+
+.favorites, .login {
+  color: wheat;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 3vw;
+}
+
+/* search start */
+.formSection {
+  align-items: center;
+  background: rgb(103, 139, 204);
+  display: flex;
+  font-size: 2vw;
+  height: 80px;
+  justify-content: space-around;
+}
+
+/* Auto Select */
 h1 {
   display: inline;
 }
