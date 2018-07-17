@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
+import Info from './components/Info.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -66,8 +67,7 @@ class App extends React.Component {
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
-        <div className="main">
-        </div>
+        <Info doctors={[]} />
       </div>
     );
   }
