@@ -9,13 +9,15 @@ class Info extends React.Component {
   }
 
   render() {
-    if (this.state.view.length > 1) {
-      return (<DoctorList doctors=this.state.doctors />);
-    } else if (this.state.view.length === 1) {
-      return (<Doctor doctor=this.state.doctors />)
+    if (this.state.doctors.length > 1) {
+      return (<DoctorList doctors={this.state.doctors} />);
+    } else if (this.state.doctors.length === 1) {
+      return (<Doctor doctor={this.state.doctors} />)
     } else {
-      return (<Div>Landing view</Div>)
+      return (<div>Landing view</div>)
     }
   }
 
 }
+
+export default Info;
