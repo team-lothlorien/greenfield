@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'Axios';
+import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
 class Search extends React.Component {
@@ -16,7 +16,6 @@ class Search extends React.Component {
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
@@ -28,7 +27,7 @@ class Search extends React.Component {
     this.getSuggestions = this.getSuggestions.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
   }
-  
+
   componentDidMount() {
     this.getConditions();
     // this.onSuggestionsClearRequested();
@@ -83,6 +82,7 @@ class Search extends React.Component {
 
 
   onFilterChange(event) {
+    this.setState({dropDown: event.target.value});
     event.preventDefault();
     this.setState({ filterCurrentlySelected: event.target.value });
   }
@@ -122,7 +122,7 @@ class Search extends React.Component {
       );
     });
     return (
-      <form 
+      <form
         onSubmit={event => {
           this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.term, this.state.location);
           (event) => this.clearInputFields(event);
