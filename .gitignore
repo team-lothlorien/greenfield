@@ -2,3 +2,6 @@ node_modules/
 .eslintrc.js
 package-lock.json
 .gitignore
+package-lock.json
+config.js
+>>>>>>> a7acab8e757310db253ea79ae2a617652b7e88cc
