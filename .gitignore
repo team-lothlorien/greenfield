@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+config.js
+server/config.js
+client/dist/bundle.js
+.eslintrc.js
+db/sqlite3.exe

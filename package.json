@@ -4,7 +4,26 @@
   "description": "Greenfield project - help patients find doctors",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server-dev": "nodemon server/index.js",
+    "react-dev": "webpack --watch -d"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-react": "latest",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "knex": "latest",
+    "path": "latest",
+    "react": "latest",
+    "react-autosuggest": "^9.3.4",
+    "react-dom": "latest",
+    "sqlite3": "latest",
+    "webpack": "latest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/team-lothlorien/greenfield/issues"
   },
-  "homepage": "https://github.com/team-lothlorien/greenfield#readme"
+  "homepage": "https://github.com/team-lothlorien/greenfield#readme",
+  "devDependencies": {
+    "webpack-cli": "^3.0.8"
+  }
 }
