@@ -2,18 +2,42 @@ import React from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
+//Languages
+const languages = [ { name: 'Mandarin Chinese' },
+  { name: 'Spanish' },
+  { name: 'English' },
+  { name: 'Hindi/Urdu' },
+  { name: 'Arabic' },
+  { name: 'Bengali' },
+  { name: 'Portuguese' },
+  { name: 'Russian' },
+  { name: 'Japanese' },
+  { name: 'German' },
+  { name: 'Javanese' },
+  { name: 'Punjabi' },
+  { name: 'Wu' },
+  { name: 'French' },
+  { name: 'Telugu' },
+  { name: 'Vietnamese' },
+  { name: 'Marathi' },
+  { name: 'Korean' },
+  { name: 'Tamil' },
+  { name: 'Italian' },
+  { name: 'Turkish' },
+  { name: 'Cantonese/Yue' } ];
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterCurrentlySelected: '',
+      filterCurrentlySelected: 'Keyword',
       term: '',
       location: '',
-      dropDown: 'Keyword',
       conditions: [],
       value: '',
       suggestions: []
     };
+
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
 
@@ -30,17 +54,59 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
+    console.log('component did mount FIRED');
     this.getConditions();
-    // this.onSuggestionsClearRequested();
   }
 
+
+
   getConditions() {
-    // axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
-    // .then((condition) => {
-    //   this.setState({conditions: condition.data.data});
-    //   // .catch(err => console.log(err));
-    // });
   }
+    //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
+    if (this.state.filterCurrentlySelected === 'Keyword') {
+      axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
+      .then((condition) => {
+        this.setState({conditions: condition.data.data})
+        .catch(err => console.log(err));
+      });
+    } else if (this.state.filterCurrentlySelected === 'Symptoms') {
+      axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
+      .then((condition) => {
+        this.setState({conditions: condition.data.data})
+        .catch(err => console.log(err));
+      });
+    } else if (this.state.filterCurrentlySelected === 'Specialties') {
+      console.log('axios called');
+      axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
+      .then((condition) => {
+        console.log(condition.data.data);
+        this.setState({conditions: condition.data.data})
+        .catch(err => console.log(err));
+      });
+    } else if (this.state.filterCurrentlySelected === 'Language') {
+      this.setState({
+        conditions: languages
+      });
+    } else if (this.state.filterCurrentlySelected === 'Insurance') {
+      axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
+      .then((condition) => {
+        this.setState({conditions: condition.data.data})
+        .catch(err => console.log(err));
+      });
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   //***********AUTOSUGGEST**********************//
 
@@ -48,7 +114,6 @@ class Search extends React.Component {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
   getSuggestions(value) {
-    // const conditions = this.state.conditions
     const escapedValue = this.escapeRegexCharacters(value.trim());
     if (escapedValue === '') {
       return [];
@@ -56,24 +121,29 @@ class Search extends React.Component {
     const regex = new RegExp('^' + escapedValue, 'i');
     return this.state.conditions.filter(condition => regex.test(condition.name));
   }
+
   getSuggestionValue(suggestion) {
     return suggestion.name;
   }
+
   renderSuggestion(suggestion) {
     return (
       <span>{suggestion.name}</span>
     );
   }
+
   onSuggestChange (event, { newValue, method }) {
     this.setState({
       value: newValue
     });
   }
+
   onSuggestionsFetchRequested({ value }) {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
   }
+
   onSuggestionsClearRequested() {
     this.setState({
       suggestions: []
@@ -82,9 +152,8 @@ class Search extends React.Component {
 
 
   onFilterChange(event) {
-    this.setState({dropDown: event.target.value});
+    this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions());
     event.preventDefault();
-    this.setState({ filterCurrentlySelected: event.target.value });
   }
 
   onTermChange(event) {
@@ -92,17 +161,20 @@ class Search extends React.Component {
     this.setState({term: event.target.value});
   }
 
+
   onLocationChange(event) {
     event.preventDefault();
     this.setState({location: event.target.value});
   }
+
+
 
   clearInputFields(event) {
     event.preventDefault();
     this.setState({
       location: '',
       term: '',
-      filterCurrentlySelected: ''
+      filterCurrentlySelected: '',
     });
   }
 
@@ -115,7 +187,7 @@ class Search extends React.Component {
     };
 
     //temp data until we have an object from
-    let filterOptions = ['Keyword', 'Symptoms', 'Location', 'Doctors', 'Specialties', 'Language'];
+    let filterOptions = ['Keyword', 'Symptoms', 'Specialties', 'Language', 'Insurance'];
     let filterList = filterOptions.map(item => {
       return (
         <option value={item} key={item}>{item}</option>
@@ -135,6 +207,7 @@ class Search extends React.Component {
             {filterList}
           </select>
         </label>
+
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
