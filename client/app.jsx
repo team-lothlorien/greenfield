@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   swapFav (){
-    
+
   }
 
   takeUsToHomePage (event) {
@@ -63,7 +63,7 @@ class App extends React.Component {
         <NavBar
           takeUsToHomePage={this.takeUsToHomePage}
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
-          takeUsToLoginPage={takeUsToLoginPage}
+          takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
         <div className="main">

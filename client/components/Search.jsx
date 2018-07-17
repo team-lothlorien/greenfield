@@ -29,7 +29,7 @@ class Search extends React.Component {
     let filterOptions = ['Keyword', 'Symptoms', 'Location', 'Doctors', 'Specialties', 'Language'];
     let filterList = filterOptions.map(item => {
       return (
-        <option value={item}>{item}</option>
+        <option value={item} key={item}>{item}</option>
       );
     });
     return (
