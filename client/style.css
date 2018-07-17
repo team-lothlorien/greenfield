@@ -2,6 +2,10 @@ h1 {
   display: inline;
 }
 
+#land {
+  background-image: url("https://i.imgflip.com/11n39t.jpg");
+}
+
 .react-autosuggest__container {
   display: inline-block;
 }
