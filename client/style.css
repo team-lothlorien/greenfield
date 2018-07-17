@@ -72,7 +72,7 @@ h1 {
 .react-autosuggest__container--open .react-autosuggest__suggestions-container {
   display: block;
   position: absolute;
-  top: 65px;
+  top: 220px;
   width: 280px;
   border: 1px solid #aaa;
   background-color: #fff;
