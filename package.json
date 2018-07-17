@@ -4,22 +4,24 @@
   "description": "Greenfield project - help patients find doctors",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server-dev": "nodemon server/index.js"
   },
   "dependencies": {
     "axios": "latest",
-    "express": "latest",
-    "body-parser": "latest",
-    "react": "latest",
-    "react-dom": "latest",
     "babel-core": "latest",
     "babel-loader": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-react": "latest",
-    "webpack": "latest",
     "bcrypt-nodejs": "latest",
+    "body-parser": "latest",
+    "express": "latest",
     "express-session": "latest",
-    "sqlite3": "latest"
+    "path": "latest",
+    "knex": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "sqlite3": "latest",
+    "webpack": "latest"
   },
   "repository": {
     "type": "git",
