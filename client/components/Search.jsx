@@ -36,7 +36,6 @@ class Search extends React.Component {
   getConditions() {
     axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
     .then((condition) => {
-      console.log(condition.data);
       this.setState({conditions: condition.data.data});
       // .catch(err => console.log(err));
     });
@@ -142,8 +141,6 @@ class Search extends React.Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps} />
-        <input type="text" value={this.state.term} onChange={this.onTermChange}/>
-
         <label>Location:</label>
         <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
         <input type="submit" value="search" />
