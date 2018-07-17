@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const searchRouter = require('./routes/search');
 const specialtyRouter = require('./routes/specialty');
@@ -9,7 +10,6 @@ const conditionsRouter = require('./routes/conditions');
 const favoritesRouter = require('./routes/favorites');
 const commentsRouter = require('./routes/comments');
 const userRouter = require('./routes/users');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 
