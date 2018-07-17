@@ -17,9 +17,10 @@
     "body-parser": "latest",
     "express": "latest",
     "express-session": "latest",
-    "path": "latest",
     "knex": "latest",
+    "path": "latest",
     "react": "latest",
+    "react-autosuggest": "^9.3.4",
     "react-dom": "latest",
     "sqlite3": "latest",
     "webpack": "latest"
