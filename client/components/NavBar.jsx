@@ -3,16 +3,16 @@ export default NavBar = (props) => {
 
   return (
     <div className="navWrapper">
-      <span className="logoWrap" 
+      <span className="logoWrap"
             onClick={event => {props.takeUsToHomePage(event)}}>
         <h1 className="logo">Whats Up Doc</h1>
       </span>
-      <span 
-        className="favorites" 
+      <span
+        className="favorites"
         onClick={event => {props.takeUsToFavoritesPage(event)}}>Favorites
       </span>
       <span 
-        className="login" 
+        className="login"
         onClick={event => {props.takeUsToLoginPage(event)}}>Login/Signup
       </span>
     </div>
