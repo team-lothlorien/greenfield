@@ -29,17 +29,6 @@ let formatLocationData = (searchValue) => {
 };
 
 module.exports = {
-  
+  formatLocationData: formatLocationData,
   url: `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY_GEO}&address=`
 }
-
-// axios.get(`${API_KEY}${searchValue}`)
-//     .then( response => {
-//       response.data.name = saveValue;
-      
-//       if (response.data.status === 'OK') {
-//         newEntry(response.data);
-//       }
-//       res.send(); 
-//      })
-//      .catch( err => console.error(err) )

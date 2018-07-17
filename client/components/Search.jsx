@@ -35,11 +35,11 @@ class Search extends React.Component {
   }
 
   getConditions() {
-    axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
-    .then((condition) => {
-      this.setState({conditions: condition.data.data});
-      // .catch(err => console.log(err));
-    });
+    // axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
+    // .then((condition) => {
+    //   this.setState({conditions: condition.data.data});
+    //   // .catch(err => console.log(err));
+    // });
   }
 
   //***********AUTOSUGGEST**********************//
@@ -124,7 +124,7 @@ class Search extends React.Component {
     return (
       <form
         onSubmit={event => {
-          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.term, this.state.location);
+          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.location);
           (event) => this.clearInputFields(event);
         }
         }
