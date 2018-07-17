@@ -6,7 +6,9 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      filterCurrentlySelected: '',
       term: '',
+      location: '',
       dropDown: 'Keyword',
       conditions: [],
       value: '',
@@ -15,6 +17,7 @@ class Search extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
     this.getConditions = this.getConditions.bind(this);
@@ -24,8 +27,8 @@ class Search extends React.Component {
     this.escapeRegexCharacters = this.escapeRegexCharacters.bind(this);
     this.getSuggestions = this.getSuggestions.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
-
   }
+  
   componentDidMount() {
     this.getConditions();
     // this.onSuggestionsClearRequested();
@@ -80,14 +83,27 @@ class Search extends React.Component {
 
 
   onFilterChange(event) {
-    this.setState({dropDown: event.target.value});
+    event.preventDefault();
+    this.setState({ filterCurrentlySelected: event.target.value });
   }
+
   onTermChange(event) {
+    event.preventDefault();
     this.setState({term: event.target.value});
   }
-  handleSubmit() {
-    handleSearch(this.state.dropDown, this.state.term);
-    this.setState({term: ''});
+
+  onLocationChange(event) {
+    event.preventDefault();
+    this.setState({location: event.target.value});
+  }
+
+  clearInputFields(event) {
+    event.preventDefault();
+    this.setState({
+      location: '',
+      term: '',
+      filterCurrentlySelected: ''
+    });
   }
 
   render() {
@@ -106,7 +122,13 @@ class Search extends React.Component {
       );
     });
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form 
+        onSubmit={event => {
+          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.term, this.state.location);
+          (event) => this.clearInputFields(event);
+        }
+        }
+      >
         <label>
           Filter:
           <select onChange={this.onFilterChange}>
@@ -121,7 +143,10 @@ class Search extends React.Component {
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps} />
         <input type="text" value={this.state.term} onChange={this.onTermChange}/>
-        <input type="submit" value="Search" />
+
+        <label>Location:</label>
+        <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
+        <input type="submit" value="search" />
       </form>
     );
   }
