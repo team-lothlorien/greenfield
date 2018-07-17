@@ -1,5 +1,17 @@
 node_modules/
+<<<<<<< HEAD
+.eslintrc.js
+package-lock.json
+.gitignore
+<<<<<<< HEAD
+package-lock.json
+config.js
+>>>>>>> a7acab8e757310db253ea79ae2a617652b7e88cc
+=======
+=======
 server/config.js
 client/dist/bundle.js
 .eslintrc.js
 package-lock.json
+>>>>>>> b13e6329c42a55faa199039cae13124ff66e93a6
+>>>>>>> dev
