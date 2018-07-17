@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(session({secret: 'secret!'}));
 
 const passport = require('./auth/googleAuth.js');
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 app.use('/search', searchRouter);
 app.use('/specialties', specialtyRouter);
@@ -29,7 +29,7 @@ app.use('/insurance', insuranceRouter);
 app.use('/conditions', conditionsRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/comments', commentsRouter);
-app.use('/user', userRouter);
+//app.use('/user', userRouter);
 
 app.get('/login', (req,res) => {
   res.redirect('/');
