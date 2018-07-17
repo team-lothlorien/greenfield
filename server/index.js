@@ -1,19 +1,27 @@
 const express = require('express');
-const axios = require('axios');
 const bodyParser = require('body-parser');
-
+const controller = require('./controller');
 const app = express();
-
 let port = process.env.PORT || 3000;
 
-app.use(bodyParser.json()); // :D
+app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../client/`));
 
 //returns search result of doctors array
 app.get('/search/:filter/:term/:location', (req, res) => {
   console.log('in server GET');
   console.log(req.params);
-  
+//returns a list of specialites
+app.get('/specialties', (req, res) => {
+
+});
+//returns a list of insurances
+app.get('/insurance', (req, res) => {
+
+});
+//returns a list of conditions
+app.get('/conditions', (req, res) => {
+
 });
 //adds doc to favorites db
 app.post('/addFavorite', (req, res) => {
