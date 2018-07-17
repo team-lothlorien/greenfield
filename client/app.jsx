@@ -10,11 +10,13 @@ class App extends React.Component {
       doctors: [],
       favorites: [],
       compare: [],
-      showFavorites: false,
+      showFavorites: false
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
     this.takeUsToLoginPage = this.takeUsToLoginPage.bind(this);
+    this.swapFav = this.swapFav.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   takeUsToHomePage (event) {
@@ -28,6 +30,10 @@ class App extends React.Component {
   takeUsToLoginPage (event) {
     event.preventDefault();
     // do something to change info section
+  }
+  handleSearch(filter, term, location) {
+    //make server request for doctor search
+    axios.get('/search');
   }
 
   componentDidMount() {
@@ -49,12 +55,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <NavBar.jsx  
+        <NavBar.jsx
           takeUsToHomePage={this.takeUsToHomePage}
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={takeUsToLoginPage}
         />
-        <h4>search, filter</h4>
+        <Search handleSearch={this.handleSearch} />
         <div className="main">
         </div>
       </div>
