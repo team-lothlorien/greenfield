@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 let port = process.env.PORT || 3000;
 app.use(bodyParser.json());
-app.use(express.static(`${__dirname}/../client/app.jsx`));
+app.use(express.static(`${__dirname}/../client/`));
 
 //returns search result of doctors array
 app.get('/search', (req, res) => {
