@@ -3,6 +3,8 @@ var DoctorList = (props) => {
     return <DoctorListEntry doctor={doctor} />;
   });
   return(
-    <div>{DoctorListEntries}</div>;
+    <div>{DoctorListEntries}</div>
   );
 };
+
+export default DoctorList;

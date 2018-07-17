@@ -35,10 +35,10 @@ class App extends React.Component {
     event.preventDefault();
     // do something to change info section
   }
-  handleSearch(event, filter, term, location) {
+  handleSearch(event, filter, location) {
     event.preventDefault();
     
-    axios.get(`/search/${filter}/${term}/${location}`)
+    axios.get(`/search/${filter}/${location}`)
       .then( response => console.log(response.data))
       .catch( err => console.log(err))
   }
