@@ -40,6 +40,7 @@ class Search extends React.Component {
 
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
+
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
