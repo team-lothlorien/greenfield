@@ -1,3 +1,7 @@
 h1 {
   display: inline;
 }
+
+.react-autosuggest__container {
+  display: inline-block;
+}
