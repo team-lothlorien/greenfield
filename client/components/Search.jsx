@@ -16,7 +16,7 @@ class Search extends React.Component {
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.onTermChange = this.onTermChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
+
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
@@ -28,7 +28,7 @@ class Search extends React.Component {
     this.getSuggestions = this.getSuggestions.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
   }
-  
+
   componentDidMount() {
     this.getConditions();
     // this.onSuggestionsClearRequested();
@@ -37,7 +37,6 @@ class Search extends React.Component {
   getConditions() {
     axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
     .then((condition) => {
-      console.log(condition.data);
       this.setState({conditions: condition.data.data});
       // .catch(err => console.log(err));
     });
@@ -83,6 +82,7 @@ class Search extends React.Component {
 
 
   onFilterChange(event) {
+    this.setState({dropDown: event.target.value});
     event.preventDefault();
     this.setState({ filterCurrentlySelected: event.target.value });
   }
@@ -122,7 +122,7 @@ class Search extends React.Component {
       );
     });
     return (
-      <form 
+      <form
         onSubmit={event => {
           this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.term, this.state.location);
           (event) => this.clearInputFields(event);
@@ -142,8 +142,6 @@ class Search extends React.Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps} />
-        <input type="text" value={this.state.term} onChange={this.onTermChange}/>
-
         <label>Location:</label>
         <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
         <input type="submit" value="search" />

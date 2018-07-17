@@ -1,14 +1,12 @@
 const express = require('express');
-const axios = require('axios');
 const bodyParser = require('body-parser');
 
 const {url, formatLocation} = require('./controller/getGeoLocation.js');
 
 const app = express();
-
 let port = process.env.PORT || 3000;
 
-app.use(bodyParser.json()); // :D
+app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../client/`));
 
 //returns search result of doctors array

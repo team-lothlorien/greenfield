@@ -14,7 +14,7 @@ class Info extends React.Component {
     } else if (this.state.doctors.length === 1) {
       return (<Doctor doctor={this.state.doctors} />)
     } else {
-      return (<div>Landing view</div>)
+      return (<div id="land">Landing view</div>)
     }
   }
 
