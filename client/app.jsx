@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
+import Info from './components/Info.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       doctors: [],
-      favorites: [],
       compare: [],
-      showFavorites: false
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -66,8 +65,7 @@ class App extends React.Component {
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
-        <div className="main">
-        </div>
+        <Info doctors={this.state.doctors} />
       </div>
     );
   }
