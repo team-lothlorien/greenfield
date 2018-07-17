@@ -27,7 +27,7 @@ class Search extends React.component {
   render() {
     //temp data until we have an object from
     let filterOptions = ['Keyword', 'Symptoms', 'Location', 'Doctors', 'Specialties', 'Language'];
-    let filterList = filterOptions.map(filt => {
+    let filterList = filterOptions.map(item => {
       return (
         <option value={item}>{item}</option>
       );

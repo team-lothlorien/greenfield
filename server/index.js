@@ -1,21 +1,20 @@
 const express = require('express');
-<<<<<<< HEAD
-=======
+
 const axios = require('axios');
->>>>>>> dev
+
 const app = express();
 const bodyParser = require('body-parser');
 
 let port = process.env.PORT || 3000;
-<<<<<<< HEAD
+
 app.use(bodyParser.json()); // :D
-app.use(express.static(`${__dirname}/../client/`))
+app.use(express.static(`${__dirname}/../client/`));
 
 
 app.listen(port, () => {
   console.log(`Connected to port ${port}...`);
-})
-=======
+});
+
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../client/`));
 
@@ -42,7 +41,7 @@ app.post('/addComment', (req, res) => {
 //edits comment db
 app.put('/editComment', (req, res) => {
 
-})
+});
 //deletes comment db
 app.delete('/deleteComment', (req, res) => {
 
@@ -56,4 +55,3 @@ app.get('/comments', (req, res) => {
 app.listen(port, () => {
   console.log(`Connected to port ${port}...`);
 });
->>>>>>> dev
