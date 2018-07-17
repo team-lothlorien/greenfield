@@ -10,9 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       doctors: [],
-      favorites: [],
       compare: [],
-      showFavorites: false
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -67,7 +65,7 @@ class App extends React.Component {
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
-        <Info doctors={[]} />
+        <Info doctors={this.state.doctors} />
       </div>
     );
   }
