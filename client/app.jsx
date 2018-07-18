@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
+import Login from './components/Login.jsx';
 
 
 
@@ -60,26 +61,26 @@ class App extends React.Component {
     // do something to change info section
   }
   handleSearch(term, location) {
-    axios.get(`/search`, {
+    axios.get('/search', {
       params: {
         term: term,
         location: location,
       }
     })
       .then( response => {
-        this.setState({doctors: response.data})
+        this.setState({doctors: response.data});
       })
-      .catch( err => console.log(err))
+      .catch( err => console.log(err));
   }
 
   getMapApi(location) {
     axios.get('/location', {params: { location: location }})
       .then( response => console.log(response.data))
-      .catch( err => console.log(err))
+      .catch( err => console.log(err));
   }
 
-  onDoctorClick(doctor){
-    this.setState({doctors: [doctor]})
+  onDoctorClick(doctor) {
+    this.setState({doctors: [doctor]});
   }
 
   getDoctors() {
