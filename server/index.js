@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const knex = require('./db/index.js');
+const knex = require('../db/index.js');
 
 //Router
 const searchRouter = require('./routes/search');
@@ -44,29 +44,83 @@ app.use('/location', locationRouter);
 //Authentication
 
 app.post('/signup', (req, res) => {
+  let saltRounds = 10;
   let username = req.body.username;
-  let firstName = req.body.firstname || null;
-  let lastName = req.body.lastName || null;
-  let zipCode = req.body.zipcode || null;
-  let email = req.body.email || null;
-  bcrypt.hash(req.body.password, null, null, (err, hash) => {
-    knex('Users').insert({
-      username: username,
-      password: hash,
-      firstName: firstName,
-      lastName: lastName,
-      zipCode: zipCode,
-      email: email
-    })
-    .then(resp => {
-      console.log(`${username} added to db`);
-      req.session.regenerate(() => {
-        req.session.user = username;
-      });
-    })
-    .catch(err => console.alert('Input not accepted', err));
+  let password = req.body;
+  let firstName = req.body.firstName;
+  let lastName = req.body.lasName;
+  let zipCode = req.body.zipCode;
+  let email = req.body.email;
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      knex('Users').insert({
+        username: username,
+        password: hash,
+        firstName: firstName,
+        lastName: lastName,
+        zipCode: zipCode,
+        email: email
+      })
+      .then(resp => {
+        console.log(`${username} added to db`);
+        req.session.regenerate(() => {
+          req.session.user = username;
+        });
+      })
+      .catch(err => console.log('Input not accepted', err));
+    });
   });
 });
+
+app.post('/login', (req, response) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  knex('Users').where({username: username})
+  .select('password')
+  .then(resp => {
+    bcrypt.compare(password, resp[0].password, (err, res) => {
+      if (res) {
+        req.session.regenerate(() => {
+          response.status(201);
+          console.log('Password Matched! redirecting....');
+        });
+      } else {
+        response.status(401);
+        response.send('WRONG PASSWORD FIND A GRAVE');
+        console.log('password did not match');
+      }
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // app.post('/login', (req, res) => {
 //   let username = req.body.username;
@@ -78,9 +132,9 @@ app.post('/signup', (req, res) => {
 
 
 
-app.get('/login', (req,res) => {
-  res.redirect('/');
-});
+// app.get('/login', (req,res) => {
+//   res.redirect('/');
+// });
 
 app.get('/logout', (req, res) => {
   req.session.destroy(function(err) {
