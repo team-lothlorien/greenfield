@@ -31,7 +31,7 @@ class Search extends React.Component {
     super(props);
     this.state = {
       filterCurrentlySelected: 'Keyword',
-      term: '',
+      // term: '',
       location: '',
       conditions: [],
       value: '',
@@ -39,7 +39,7 @@ class Search extends React.Component {
     };
 
     this.onFilterChange = this.onFilterChange.bind(this);
-    this.onTermChange = this.onTermChange.bind(this);
+    // this.onTermChange = this.onTermChange.bind(this);
 
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
@@ -144,10 +144,10 @@ class Search extends React.Component {
     event.preventDefault();
   }
 
-  onTermChange(event) {
-    event.preventDefault();
-    this.setState({term: event.target.value});
-  }
+  // onTermChange(event) {
+  //   event.preventDefault();
+  //   this.setState({term: event.target.value});
+  // }
 
 
   onLocationChange(event) {
@@ -157,19 +157,19 @@ class Search extends React.Component {
 
 
 
-  clearInputFields(event) {
-    event.preventDefault();
-    this.setState({
-      location: '',
-      term: '',
-      filterCurrentlySelected: '',
-    });
-  }
+  // clearInputFields(event) {
+  //   event.preventDefault();
+  //   this.setState({
+  //     location: '',
+  //     term: '',
+  //     filterCurrentlySelected: '',
+  //   });
+  // }
 
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Soft Skull Portion',
+      placeholder: 'Search by keyword...',
       value,
       onChange: this.onSuggestChange
     };

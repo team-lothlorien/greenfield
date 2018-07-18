@@ -3,8 +3,8 @@ var DoctorListEntry = (props) => {
   return(
     <div className="dleCard">
       <div className="dleIntro">
-        <h2 className="dleName">{props.doctor.profile.first_name+" "+props.doctor.profile.last_name+" "+props.doctor.profile.title}</h2>
-        <img src={props.doctor.profile.image_url}></img>
+        <a className="dleName" onClick={() => props.onClick(props.doctor)}>{props.doctor.profile.first_name+" "+props.doctor.profile.last_name+" "+props.doctor.profile.title}</a>
+        <img className="dleImage" src={props.doctor.profile.image_url}></img>
       </div>
       <div className="dleSummary">
         <img src={props.doctor.ratings[0].image_url_small}></img>

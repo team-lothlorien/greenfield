@@ -9,7 +9,8 @@ const insuranceRouter = require('./routes/insurance');
 const conditionsRouter = require('./routes/conditions');
 const favoritesRouter = require('./routes/favorites');
 const commentsRouter = require('./routes/comments');
-const userRouter = require('./routes/users');
+const locationRouter = require('./routes/location');
+// const userRouter = require('./routes/users');
 
 const app = express();
 
