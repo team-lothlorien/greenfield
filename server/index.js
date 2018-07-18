@@ -1,8 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+//Authentication
+const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const knex = require('./db/index.js');
 
+//Router
 const searchRouter = require('./routes/search');
 const specialtyRouter = require('./routes/specialty');
 const insuranceRouter = require('./routes/insurance');
@@ -12,18 +17,20 @@ const commentsRouter = require('./routes/comments');
 const locationRouter = require('./routes/location');
 // const userRouter = require('./routes/users');
 
+//express
 const app = express();
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(`${__dirname}/../client/`));
+
+//Authentication
 app.use(cookieParser());
 app.use(session({secret: 'secret!'}));
 
 // const passport = require('./auth/googleAuth.js');
-
 // app.use(passport.initialize());
 // app.use(passport.session());
+
 
 app.use('/search', searchRouter);
 app.use('/specialties', specialtyRouter);
@@ -33,6 +40,43 @@ app.use('/favorites', favoritesRouter);
 app.use('/comments', commentsRouter);
 app.use('/location', locationRouter);
 // app.use('/user', userRouter);
+
+//Authentication
+
+app.post('/signup', (req, res) => {
+  let username = req.body.username;
+  let firstName = req.body.firstname || null;
+  let lastName = req.body.lastName || null;
+  let zipCode = req.body.zipcode || null;
+  let email = req.body.email || null;
+  bcrypt.hash(req.body.password, null, null, (err, hash) => {
+    knex('Users').insert({
+      username: username,
+      password: hash,
+      firstName: firstName,
+      lastName: lastName,
+      zipCode: zipCode,
+      email: email
+    })
+    .then(resp => {
+      console.log(`${username} added to db`);
+      req.session.regenerate(() => {
+        req.session.user = username;
+      });
+    })
+    .catch(err => console.alert('Input not accepted', err));
+  });
+});
+
+// app.post('/login', (req, res) => {
+//   let username = req.body.username;
+//   let enteredPassword = req.body.password;
+//   kn
+// })
+
+
+
+
 
 app.get('/login', (req,res) => {
   res.redirect('/');
