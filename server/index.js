@@ -43,8 +43,8 @@ app.use('/comments', commentsRouter);
 app.use('/location', locationRouter);
 // app.use('/user', userRouter);
 
-//Authentication
 
+//Authentication
 app.post('/signup', (req, res) => {
   let saltRounds = 10;
   let username = req.body.username;
@@ -74,7 +74,6 @@ app.post('/signup', (req, res) => {
   });
 });
 
-
 app.post('/login', (req, response) => {
   let username = req.body.username;
   let password = 'plokij';
@@ -100,6 +99,7 @@ app.post('/login', (req, response) => {
 app.post('/logout', (req, res) => {
   req.session.destroy();
 });
+
 
 
 
