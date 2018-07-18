@@ -1,13 +1,30 @@
 import React from 'react';
 import DoctorList from './DoctorList.jsx';
+import MapContainer from './Map.jsx';
+
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
-    if (props.doctors.length > 1) {
-      return (<DoctorList doctors={props.doctors} onClick={props.onClick}/>);
-    } else if (props.doctors.length === 1) {
-      return (<Doctor doctor={props.doctors[0]} />)
+    if (this.props.doctors.length > 1) {
+      return (
+        <div className="bodyWrapper">
+          <DoctorList doctors={this.props.doctors} onClick={props.onClick}/>
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+        );
+    } else if (this.props.doctors.length === 1) {
+      return (
+        <div className="bodyWrapper">
+          <Doctor doctor={this.props.doctors[0]} />
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+          )
     } else {
-      return (<div id="land">Landing view</div>)
+      return (
+        <div className="bodyWrapper">
+          <div id="land">Landing view</div>
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+        )
     }
 }
 

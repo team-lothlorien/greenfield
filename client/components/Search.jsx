@@ -61,7 +61,9 @@ class Search extends React.Component {
 
 
   getConditions() {
-    // console.log('get conditions fired')
+    console.log('TERM:', this.state.term);
+    console.log('VALUE:', this.state.value);
+
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
     // if (this.state.filterCurrentlySelected === 'Keyword') {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')

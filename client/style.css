@@ -51,6 +51,11 @@ h1 {
   justify-content: space-around;
 }
 
+/* Main view */
+.bodyWrapper {
+  
+}
+
 /* Auto Select */
 h1 {
   display: inline;
