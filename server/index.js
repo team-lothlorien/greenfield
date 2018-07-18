@@ -66,7 +66,7 @@ app.post('/signup', (req, res) => {
       .then(resp => {
         console.log(`${username} added to db`);
         req.session.regenerate(() => {
-          req.session.user = username;
+          req.session.username = username;
         });
       })
       .catch(err => { res.status(401).send(err); });
@@ -101,6 +101,12 @@ app.post('/login', (req, response) => {
 app.post('/logout', (req, res) => {
   req.session.destroy();
 });
+
+app.get('/authenticate', (req, res) => {
+  res.send(req.session.username ? !!req.session.username : false);
+});
+
+
 
 
 
