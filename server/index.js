@@ -9,7 +9,8 @@ const insuranceRouter = require('./routes/insurance');
 const conditionsRouter = require('./routes/conditions');
 const favoritesRouter = require('./routes/favorites');
 const commentsRouter = require('./routes/comments');
-const userRouter = require('./routes/users');
+const locationRouter = require('./routes/location');
+// const userRouter = require('./routes/users');
 
 const app = express();
 
@@ -19,9 +20,16 @@ app.use(express.static(`${__dirname}/../client/`));
 app.use(cookieParser());
 app.use(session({secret: 'secret!'}));
 
+<<<<<<< HEAD
+// const passport = require('./auth/googleAuth.js');
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+=======
 const passport = require('./auth/googleAuth.js');
 //app.use(passport.initialize());
 //app.use(passport.session());
+>>>>>>> dev
 
 app.use('/search', searchRouter);
 app.use('/specialties', specialtyRouter);
@@ -29,7 +37,12 @@ app.use('/insurance', insuranceRouter);
 app.use('/conditions', conditionsRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/comments', commentsRouter);
+<<<<<<< HEAD
+app.use('/location', locationRouter);
+// app.use('/user', userRouter);
+=======
 //app.use('/user', userRouter);
+>>>>>>> dev
 
 app.get('/login', (req,res) => {
   res.redirect('/');
