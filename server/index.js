@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //Authentication
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const knex = require('../db/index.js');
@@ -54,7 +54,7 @@ app.post('/signup', (req, res) => {
   let zipCode = req.body.zipCode;
   let email = req.body.email;
   bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
+    bcrypt.hash(password, salt, null, (err, hash) => {
       knex('Users').insert({
         username: username,
         password: hash,
@@ -94,35 +94,6 @@ app.post('/login', (req, response) => {
     });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // app.post('/login', (req, res) => {
 //   let username = req.body.username;
