@@ -7,7 +7,6 @@ var DoctorListEntry = (props) => {
         <img className="dleImage" src={props.doctor.profile.image_url}></img>
       </div>
       <div className="dleSummary">
-        <img src={props.doctor.ratings[0].image_url_small}></img>
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
       </div>
     </div>

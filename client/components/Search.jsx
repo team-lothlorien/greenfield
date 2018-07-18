@@ -81,7 +81,7 @@ class Search extends React.Component {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
     //   .then((condition) => {
     //     console.log('axios specialties fired');
-        
+
     //     this.setState({conditions: condition.data.data})
     //   })
     //   .catch(err => console.log(err));
@@ -93,13 +93,13 @@ class Search extends React.Component {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
     //   .then((condition) => {
     //     console.log('axios insurance fired');
-        
+
     //     this.setState({conditions: condition.data.data})
     //   })
     //   .catch(err => console.log(err));
     // }
   }
-  
+
 
   //***********AUTOSUGGEST**********************//
 
@@ -187,13 +187,7 @@ class Search extends React.Component {
       );
     });
     return (
-      <form
-        className="formSection"
-        onSubmit={() => {
-          this.props.handleSearch(this.state.value, this.state.location);
-        }
-        }
-      >
+      <div className="formSection">
         <label>
           Filter:
           <select onChange={this.onFilterChange}>
@@ -210,8 +204,11 @@ class Search extends React.Component {
           inputProps={inputProps} />
         <label>Location:</label>
         <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
-        <input type="submit" value="search" />
-      </form>
+        <button onClick={() => {
+          this.props.handleSearch(this.state.value, this.state.location);
+        }
+      }>search</button>
+      </div>
     );
   }
 }

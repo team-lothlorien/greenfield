@@ -42,12 +42,17 @@ class App extends React.Component {
         location: location,
       }
     })
-      .then( response => console.log(response.data))
+      .then( response => {
+        this.setState({doctors: response.data})
+      })
       .catch( err => console.log(err))
   }
 
   componentDidMount() {
 
+  }
+  onDoctorClick(doctor){
+    this.setState({doctors: [doctor]})
   }
 
   getDoctors() {
@@ -71,7 +76,7 @@ class App extends React.Component {
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
-        <Info doctors={this.state.doctors} />
+        <Info doctors={this.state.doctors} onClick={this.onDoctorClick.bind(this)}/>
       </div>
     );
   }
