@@ -31,7 +31,7 @@ class Search extends React.Component {
     super(props);
     this.state = {
       filterCurrentlySelected: 'Keyword',
-      term: '',
+      // term: '',
       location: '',
       conditions: [],
       value: '',
@@ -39,7 +39,7 @@ class Search extends React.Component {
     };
 
     this.onFilterChange = this.onFilterChange.bind(this);
-    this.onTermChange = this.onTermChange.bind(this);
+    // this.onTermChange = this.onTermChange.bind(this);
 
     this.onLocationChange = this.onLocationChange.bind(this);
     //AUTOSUGGEST
@@ -54,43 +54,50 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.getConditions();
+    // console.log('components did mount fired')
+    // this.getConditions();
   }
 
 
 
   getConditions() {
-  
+    // console.log('get conditions fired')
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
-    if (this.state.filterCurrentlySelected === 'Keyword') {
-      axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
-      .then((condition) => {
-        this.setState({conditions: condition.data.data})
-      })
-      .catch(err => console.log(err));
-    } else if (this.state.filterCurrentlySelected === 'Symptoms') {
-      axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
-      .then((condition) => {
-        this.setState({conditions: condition.data.data})
-      })
-      .catch(err => console.log(err));
-    } else if (this.state.filterCurrentlySelected === 'Specialties') {
-      axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
-      .then((condition) => {
-        this.setState({conditions: condition.data.data})
-      })
-      .catch(err => console.log(err));
-    } else if (this.state.filterCurrentlySelected === 'Language') {
-      this.setState({
-        conditions: languages
-      });
-    } else if (this.state.filterCurrentlySelected === 'Insurance') {
-      axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
-      .then((condition) => {
-        this.setState({conditions: condition.data.data})
-      })
-      .catch(err => console.log(err));
-    }
+    // if (this.state.filterCurrentlySelected === 'Keyword') {
+    //   axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
+    //   .then((condition) => {
+    //     console.log('axios condition fired')
+    //     this.setState({conditions: condition.data.data})
+    //   })
+    //   .catch(err => console.log(err));
+    // } else if (this.state.filterCurrentlySelected === 'Symptoms') {
+    //   axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
+    //   .then((condition) => {
+    //     console.log('axios symtoms fired')
+    //     this.setState({conditions: condition.data.data})
+    //   })
+    //   .catch(err => console.log(err));
+    // } else if (this.state.filterCurrentlySelected === 'Specialties') {
+    //   axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
+    //   .then((condition) => {
+    //     console.log('axios specialties fired');
+        
+    //     this.setState({conditions: condition.data.data})
+    //   })
+    //   .catch(err => console.log(err));
+    // } else if (this.state.filterCurrentlySelected === 'Language') {
+    //   this.setState({
+    //     conditions: languages
+    //   });
+    // } else if (this.state.filterCurrentlySelected === 'Insurance') {
+    //   axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
+    //   .then((condition) => {
+    //     console.log('axios insurance fired');
+        
+    //     this.setState({conditions: condition.data.data})
+    //   })
+    //   .catch(err => console.log(err));
+    // }
   }
   
 
@@ -142,10 +149,10 @@ class Search extends React.Component {
     event.preventDefault();
   }
 
-  onTermChange(event) {
-    event.preventDefault();
-    this.setState({term: event.target.value});
-  }
+  // onTermChange(event) {
+  //   event.preventDefault();
+  //   this.setState({term: event.target.value});
+  // }
 
 
   onLocationChange(event) {
@@ -155,19 +162,19 @@ class Search extends React.Component {
 
 
 
-  clearInputFields(event) {
-    event.preventDefault();
-    this.setState({
-      location: '',
-      term: '',
-      filterCurrentlySelected: '',
-    });
-  }
+  // clearInputFields(event) {
+  //   event.preventDefault();
+  //   this.setState({
+  //     location: '',
+  //     term: '',
+  //     filterCurrentlySelected: '',
+  //   });
+  // }
 
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: 'Soft Skull Portion',
+      placeholder: 'Search by keyword...',
       value,
       onChange: this.onSuggestChange
     };
@@ -182,9 +189,8 @@ class Search extends React.Component {
     return (
       <form
         className="formSection"
-        onSubmit={event => {
-          this.props.handleSearch(event, this.state.filterCurrentlySelected, this.state.location);
-          (event) => this.clearInputFields(event);
+        onSubmit={() => {
+          this.props.handleSearch(this.state.value, this.state.location);
         }
         }
       >

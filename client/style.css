@@ -1,4 +1,12 @@
+.dleCard {
+  float: left;
+  margin-left: 6%;
+  margin-right: 6%;
+}
 
+img {
+  display: block;
+}
 h1 {
   color: rgb(230, 156, 20);
   font-family: 'Pacifico', cursive;
