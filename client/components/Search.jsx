@@ -61,7 +61,9 @@ class Search extends React.Component {
 
 
   getConditions() {
-    // console.log('get conditions fired')
+    console.log('TERM:', this.state.term);
+    console.log('VALUE:', this.state.value);
+
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
     // if (this.state.filterCurrentlySelected === 'Keyword') {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
@@ -81,7 +83,7 @@ class Search extends React.Component {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
     //   .then((condition) => {
     //     console.log('axios specialties fired');
-        
+
     //     this.setState({conditions: condition.data.data})
     //   })
     //   .catch(err => console.log(err));
@@ -93,13 +95,13 @@ class Search extends React.Component {
     //   axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
     //   .then((condition) => {
     //     console.log('axios insurance fired');
-        
+
     //     this.setState({conditions: condition.data.data})
     //   })
     //   .catch(err => console.log(err));
     // }
   }
-  
+
 
   //***********AUTOSUGGEST**********************//
 
@@ -189,8 +191,10 @@ class Search extends React.Component {
     return (
       <form
         className="formSection"
-        onSubmit={() => {
-          this.props.handleSearch(this.state.value, this.state.location);
+        onSubmit={event => {
+          console.log('EVENT:', event);
+          this.props.handleSearch(event.target.value, this.state.filterCurrentlySelected, this.state.location);
+          (event) => this.clearInputFields(event);
         }
         }
       >
