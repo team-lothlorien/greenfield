@@ -1,5 +1,7 @@
 import React from 'react';
 import DoctorList from './DoctorList.jsx';
+import MapContainer from './Map.jsx';
+
 import Doctor from './Doctor.jsx';
 class Info extends React.Component {
   constructor(props) {
@@ -2555,11 +2557,26 @@ class Info extends React.Component {
 
   render() {
     if (this.state.doctors.length > 1) {
-      return (<DoctorList doctors={this.state.doctors} onClick={this.onClick.bind(this)}/>);
+      return (
+        <div className="bodyWrapper">
+          <DoctorList doctors={this.state.doctors} />
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+        );
     } else if (this.state.doctors.length === 1) {
-      return (<Doctor doctor={this.state.doctors[0]} />)
+      return (
+        <div className="bodyWrapper">
+          <Doctor doctor={this.state.doctors[0]} />
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+          )
     } else {
-      return (<div id="land">Landing view</div>)
+      return (
+        <div className="bodyWrapper">
+          <div id="land">Landing view</div>
+          <MapContainer location={this.props.location} className="map" />
+        </div>
+        )
     }
   }
 
