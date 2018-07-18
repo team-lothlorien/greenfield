@@ -11,12 +11,14 @@ class App extends React.Component {
     this.state = {
       doctors: [],
       compare: [],
+      location: ''
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
     this.takeUsToLoginPage = this.takeUsToLoginPage.bind(this);
     this.swapFav = this.swapFav.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.getMapApi = this.getMapApi.bind(this);
   }
 
   swapFav (){
@@ -39,6 +41,12 @@ class App extends React.Component {
     event.preventDefault();
     
     axios.get(`/search/${filter}/${location}`)
+      .then( response => console.log(response.data))
+      .catch( err => console.log(err))
+  }
+
+  getMapApi(location) {
+    axios.get('/location', {params: { location: location }})
       .then( response => console.log(response.data))
       .catch( err => console.log(err))
   }
@@ -68,7 +76,11 @@ class App extends React.Component {
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
         <Search handleSearch={this.handleSearch} />
-        <Info doctors={this.state.doctors} />
+        <Info 
+          doctors={this.state.doctors} 
+          getMapApi={this.getMapApi}
+          location={this.state.location}
+        />
       </div>
     );
   }
