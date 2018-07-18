@@ -42,7 +42,7 @@ class App extends React.Component {
         location: location,
       }
     })
-      .then( response => console.log(response.data))
+      .then( response => console.log(response))
       .catch( err => console.log(err))
   }
 

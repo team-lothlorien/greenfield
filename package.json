@@ -19,6 +19,7 @@
     "express": "latest",
     "express-session": "^1.15.6",
     "knex": "latest",
+    "moment": "^2.22.2",
     "path": "latest",
     "react": "latest",
     "react-autosuggest": "^9.3.4",

@@ -1,27 +1,32 @@
 const db = require('../../db')
 const moment = require('moment')
-//require the database
 
-//returns a promise
+
 let saveComments = (doctorId, username, comment) => {
-  db.insert({
+  return db('Comments').insert({
     doctorId: doctorId,
     username: username,
     comment: comment,
-    date: new Date()
+    date: moment().format('MMMM Do, YYYY')
   })
 };
 
 let getComments = () => {
-
+  return db.select()
+  .table('Comments')
 };
 
 let editComments = () => {
 
 };
 
-let deleteComments = () => {
-
+let deleteComments = (username, doctorId) => {
+  db('Comments')
+  .where({
+    username: username,
+    doctorId: doctorId
+  })
+  .del()
 };
 
 
