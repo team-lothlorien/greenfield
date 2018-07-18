@@ -1,13 +1,17 @@
 const apiHelper = require('../apiHelpers/findDoctors');
+const loc = require('../apiHelpers/findLocation');
 
 module.exports = {
   //returns search result of doctors array
   get: (req, res) => {
-    console.log(req.body);
-    console.log(req.query);
-    console.log(req.params);
-    console.log(req);
-    res.sendStatus(200);
-    // apiHelper.findDoctors(req.body.term, req.body.lat, req.body.long)
+    let query = req.query.term;
+    let location = req.query.location;
+    loc.findLocation(location)
+    .then(data => {
+      return apiHelper.findDoctors(query, data[0], data[1])
+    })
+    .then(doctors => {
+      res.send(doctors);
+    })
   }
 }
