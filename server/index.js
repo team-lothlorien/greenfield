@@ -11,7 +11,7 @@ const knex = require('../db/index.js');
 const searchRouter = require('./routes/search');
 const specialtyRouter = require('./routes/specialty');
 const insuranceRouter = require('./routes/insurance');
-const mapRouter = require('./routes/map');
+
 const conditionsRouter = require('./routes/conditions');
 const favoritesRouter = require('./routes/favorites');
 const commentsRouter = require('./routes/comments');
@@ -36,7 +36,7 @@ app.use(session({secret: 'secret!'}));
 app.use('/search', searchRouter);
 app.use('/specialties', specialtyRouter);
 app.use('/insurance', insuranceRouter);
-app.use('/map', mapRouter);
+
 app.use('/conditions', conditionsRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/comments', commentsRouter);
