@@ -74,9 +74,11 @@ app.post('/signup', (req, res) => {
   });
 });
 
+
+
 app.post('/login', (req, response) => {
   let username = req.body.username;
-  let password = 'plokij';
+  let password = req.body.password;
   knex('Users').where({username: username})
   .select('password')
   .then(resp => {
