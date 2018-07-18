@@ -1,8 +1,15 @@
+const db = require('../../db')
+const moment = require('moment')
 //require the database
 
 //returns a promise
-let saveComments = () => {
-  
+let saveComments = (doctorId, username, comment) => {
+  db.insert({
+    doctorId: doctorId,
+    username: username,
+    comment: comment,
+    date: new Date()
+  })
 };
 
 let getComments = () => {
