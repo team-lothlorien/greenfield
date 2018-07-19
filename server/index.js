@@ -82,20 +82,27 @@ app.post('/login', (req, response) => {
   knex('Users').where({username: username})
   .select('password')
   .then(resp => {
-    bcrypt.compare(password, resp[0].password, (err, res) => {
-      if (res) {
-        req.session.regenerate(() => {
-          response.status(201);
-          console.log('Password Matched! redirecting....');
-        });
-      } else {
-        response.status(401);
-        response.send('WRONG PASSWORD FIND A GRAVE');
-        console.log('password did not match');
-      }
-    });
+    if (resp[0].password) {
+      bcrypt.compare(password, resp[0].password, (err, res) => {
+        if (res) {
+          req.session.regenerate(() => {
+            response.status(201);
+            console.log('Password Matched! redirecting....');
+          });
+        } else {
+          response.status(401);
+          response.send('WRONG PASSWORD FIND A GRAVE');
+          console.log('password did not match');
+        }
+      });
+      //TEMP FIX UNTIL I FIND OUT HOW TO CALL THE CATCH;
+    } else {
+      // console.log(response);
+      response.status(401);
+      response.send({status: false});
+    }
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log('ERROR CAUGHT:', err));
 });
 
 app.post('/logout', (req, res) => {
@@ -105,12 +112,6 @@ app.post('/logout', (req, res) => {
 app.get('/authenticate', (req, res) => {
   res.send(req.session.username ? !!req.session.username : false);
 });
-
-
-
-
-
-
 
 let port = process.env.PORT || 3000;
 //creates server connection
