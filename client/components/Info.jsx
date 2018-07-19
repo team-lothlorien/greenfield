@@ -5,7 +5,7 @@ import MapContainer from './Map.jsx';
 
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
-  
+
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">
@@ -39,7 +39,6 @@ var Info = (props) => {
       return (
         <div className="bodyWrapper">
           <div id="land">Landing view</div>
-          </div>
         </div>
         )
     }
