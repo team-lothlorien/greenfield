@@ -1,4 +1,4 @@
-//require the database
+
 
 //returns a promise
 let saveFavorites = () => {
