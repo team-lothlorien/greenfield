@@ -4,7 +4,6 @@
   margin-right: 4%;
   width: 200px;
   height: 200px
-
 }
 
 .dCard {
@@ -18,16 +17,39 @@
   width: 150px;
 }
 
+.dList {
+  width: 50%;
+}
+
 img {
   display: block;
 }
+
 h1 {
   color: rgb(230, 156, 20);
   font-family: 'Pacifico', cursive;
-  font-size: 8vw;
+  font-size: 4vw;
+}
+
+.map {
+  position: fixed;
+  width: 100%;
+  top: 240px;
+  left: 50%;
+}
+
+.dList {
+  width: 50%;
+  top: 250px;
+  position: relative;
+  z-index: -1;
 }
 
 .navWrapper {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   align-items: center;
   background: rgb(83, 83, 238);
   display: flex;
@@ -38,25 +60,35 @@ h1 {
 .favorites, .login {
   color: wheat;
   font-family: 'Quicksand', sans-serif;
-  font-size: 3vw;
+  font-size: 2vw;
 }
 
 /* search start */
+
 .formSection {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 160px;
   align-items: center;
   background: rgb(103, 139, 204);
   display: flex;
   font-size: 2vw;
   height: 80px;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+
+label, label * {
+  margin: 5px;
+  font-size: 2vw;
 }
 
 /* Main view */
-.bodyWrapper {
-  
-}
+
+.bodyWrapper {}
 
 /* Auto Select */
+
 h1 {
   display: inline;
 }
@@ -73,12 +105,11 @@ h1 {
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 1px;
+  height: 2vw;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 2vw;
   border: 1px solid #aaa;
   border-radius: 4px;
 }
