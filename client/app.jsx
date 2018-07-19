@@ -28,7 +28,7 @@ class App extends React.Component {
       latLong: '',
       loggedIn: false,
       isHidden: true
-      
+
     };
     this.createUser = this.createUser.bind(this);
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
@@ -181,14 +181,14 @@ class App extends React.Component {
           updateLocation={this.updateLocation}
         />
         {renderMe}
-        <MuiThemeProvider>
+        {/*<MuiThemeProvider>
           <div className='login-button-navWrapper'>
             <RaisedButton label="Login" primary={true}
               style={style} onClick={(event) => this.toggleHidden(event)}/>
             </div>
             {!this.state.isHidden && <div className='login-wrapper'><Login createUser={this.createUser}className='login-modal'/></div>}
           </MuiThemeProvider>
-          <Signup/>
+          <Signup/>*/}
         </div>
       );
     }
