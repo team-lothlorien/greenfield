@@ -11,7 +11,8 @@ class App extends React.Component {
     this.state = {
       doctors: [],
       compare: [],
-      location: ''
+      location: '',
+      latLong: ''
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -19,6 +20,7 @@ class App extends React.Component {
     this.swapFav = this.swapFav.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
+    this.updateLocation = this.updateLocation.bind(this);
   }
 
   swapFav (){
@@ -51,10 +53,25 @@ class App extends React.Component {
   }
 
   getMapApi(location) {
-    axios.get('/location', {params: { location: location }})
-      .then( response => console.log(response.data))
+    axios.get('/location', {
+      params: { 
+        location: location 
+      }
+    })
+      .then( response => {
+        this.setState({ latLong: [response.data[0], response.data[1]] })
+      })
       .catch( err => console.log(err))
   }
+
+  updateLocation(location) {
+    this.getMapApi(location);
+  }
+
+  // componentDidUpdate() {
+  //   console.log('component Did Update...:', this.state.location);
+  //   this.getMapApi(this.state.location)
+  // }
 
   componentDidMount() {
 
@@ -83,12 +100,16 @@ class App extends React.Component {
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
-        <Search handleSearch={this.handleSearch} />
+        <Search 
+          handleSearch={this.handleSearch} 
+          updateLocation={this.updateLocation}
+        />
         <Info
           doctors={this.state.doctors}
           getMapApi={this.getMapApi}
           location={this.state.location}
           onClick={this.onDoctorClick.bind(this)}
+          latLong={this.state.latLong}
         />
       </div>
     );

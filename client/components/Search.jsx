@@ -208,6 +208,7 @@ class Search extends React.Component {
         <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
         <button onClick={() => {
           this.props.handleSearch(this.state.value, this.state.location);
+          this.props.updateLocation(this.state.location);
         }
       }>search</button>
       </div>

@@ -8,21 +8,36 @@ var Info = (props) => {
       return (
         <div className="bodyWrapper">
           <DoctorList doctors={props.doctors} onClick={props.onClick}/>
-          <MapContainer location={props.location} className="map" />
+          <MapContainer 
+            location={props.location} 
+            className="map" 
+            latLong={props.latLong}
+            doctors={props.doctors}
+          />
         </div>
         );
     } else if (props.doctors.length === 1) {
       return (
         <div className="bodyWrapper">
           <Doctor doctor={props.doctors[0]} />
-          <MapContainer location={props.location} className="map" />
+          <MapContainer 
+            location={props.location} 
+            className="map" 
+            latLong={props.latLong}
+            doctors={props.doctors}
+          />
         </div>
           )
     } else {
       return (
         <div className="bodyWrapper">
           <div id="land">Landing view</div>
-          <MapContainer location={props.location} className="map" />
+          <MapContainer 
+            location={props.location} 
+            className="map" 
+            latLong={props.latLong}
+            doctors={props.doctors}
+          />
         </div>
         )
     }
