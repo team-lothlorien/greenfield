@@ -21,6 +21,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: '',
       doctors: [],
       compare: [],
       location: '',
@@ -28,11 +29,7 @@ class App extends React.Component {
       loggedIn: false,
       isHidden: true
     };
-
-
-
-
-
+    this.createUser = this.createUser.bind(this);
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
     this.takeUsToLoginPage = this.takeUsToLoginPage.bind(this);
@@ -40,21 +37,14 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
-
     this.saveDoctor = this.saveDoctor.bind(this);
-
-
   }
+
   toggleHidden () {
     this.setState({
       isHidden: !this.state.isHidden
     });
   }
-
-
-
-
-
 
   componentDidMount() {
     this.checkSession();
@@ -63,6 +53,7 @@ class App extends React.Component {
   checkSession() {
     axios.get('/authenticate')
     .then(resp => {
+      console.log('checksession:', resp.data.username);
       if (resp.data) {
         this.setState({
           loggedIn: true
@@ -70,9 +61,6 @@ class App extends React.Component {
       }
     });
   }
-
-
-
 
   swapFav () {
 
@@ -97,10 +85,10 @@ class App extends React.Component {
         location: location,
       }
     })
-      .then( response => {
-        this.setState({doctors: response.data});
-      })
-      .catch( err => console.log(err));
+    .then( response => {
+      this.setState({doctors: response.data});
+    })
+    .catch( err => console.log(err));
   }
 
   getMapApi(location) {
@@ -109,10 +97,10 @@ class App extends React.Component {
         location: location
       }
     })
-      .then( response => {
-        this.setState({ latLong: [response.data[0], response.data[1]] })
-      })
-      .catch( err => console.log(err))
+    .then( response => {
+      this.setState({ latLong: [response.data[0], response.data[1]] });
+    })
+    .catch( err => console.log(err));
   }
 
   updateLocation(location) {
@@ -120,16 +108,22 @@ class App extends React.Component {
   }
 
 
-  onDoctorClick(doctor){
-    console.log('in doctor')
+
+
+
+
+
+
+
+
+
+  onDoctorClick(doctor) {
     if (this.state.loggedIn) {
       this.saveDoctor(doctor);
     } else {
-      this.setState({doctors: [doctor]})
+      this.setState({doctors: [doctor]});
     }
-
   }
-
 
   getDoctors() {
 
@@ -151,6 +145,15 @@ class App extends React.Component {
 
   }
 
+  createUser(username) {
+    this.setState({
+      user: username
+    }, () => [
+      console.log('CREATEUSER:', this.state.user)
+    ]);
+  }
+
+
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
@@ -171,34 +174,24 @@ class App extends React.Component {
           takeUsToHomePage={this.takeUsToHomePage}
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={this.takeUsToLoginPage}
-
         />
-
-
-
-
-
         <Search
           handleSearch={this.handleSearch}
           updateLocation={this.updateLocation}
         />
         {renderMe}
         <MuiThemeProvider>
-        <div className='login-button-navWrapper'>
-          <RaisedButton label="Login" primary={true}
-            style={style} onClick={(event) => this.toggleHidden(event)}/>
+          <div className='login-button-navWrapper'>
+            <RaisedButton label="Login" primary={true}
+              style={style} onClick={(event) => this.toggleHidden(event)}/>
+            </div>
+            {!this.state.isHidden && <div className='login-wrapper'><Login createUser={this.createUser}className='login-modal'/></div>}
+          </MuiThemeProvider>
+          <Signup/>
         </div>
-          {!this.state.isHidden && <div className='login-wrapper'><Login className='login-modal'/></div>}
-        </MuiThemeProvider>
-
-      </div>
-    );
+      );
+    }
   }
-}
-
-
-
-
 
 
 
