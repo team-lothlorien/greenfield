@@ -191,26 +191,27 @@ class Search extends React.Component {
     return (
       <div className="formSection">
         <label>
-          Filter:
+          {"Filter:"}
           <select onChange={this.onFilterChange}>
-            {filterList}
+          {filterList}
           </select>
-        </label>
-
-        <Autosuggest
+          <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps} />
-        <label>Location:</label>
+        </label>
+
+        <label>Location:
         <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
         <button onClick={() => {
           this.props.handleSearch(this.state.value, this.state.location);
           this.props.updateLocation(this.state.location);
         }
       }>search</button>
+        </label>
       </div>
     );
   }

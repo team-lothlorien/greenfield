@@ -4,6 +4,10 @@ import axios from 'axios';
 import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
+import Signup from './components/Signup.jsx';
+import Login from './components/Login.jsx';
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +16,8 @@ class App extends React.Component {
       doctors: [],
       compare: [],
       location: '',
-      latLong: ''
+      latLong: '',
+      loggedIn: false
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -21,9 +26,28 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
+
   }
 
-  swapFav (){
+  componentDidMount() {
+    this.checkSession();
+
+  }
+  checkSession() {
+    axios.get('/authenticate')
+    .then(resp => {
+      if (resp.data) {
+        this.setState({
+          loggedIn: true
+        });
+      }
+    });
+  }
+
+
+
+
+  swapFav () {
 
   }
 
@@ -40,16 +64,16 @@ class App extends React.Component {
     // do something to change info section
   }
   handleSearch(term, location) {
-    axios.get(`/search`, {
+    axios.get('/search', {
       params: {
         term: term,
         location: location,
       }
     })
       .then( response => {
-        this.setState({doctors: response.data})
+        this.setState({doctors: response.data});
       })
-      .catch( err => console.log(err))
+      .catch( err => console.log(err));
   }
 
   getMapApi(location) {
@@ -111,9 +135,12 @@ class App extends React.Component {
           onClick={this.onDoctorClick.bind(this)}
           latLong={this.state.latLong}
         />
+        <Signup/>
+        <Login/>
       </div>
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
