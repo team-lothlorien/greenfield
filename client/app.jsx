@@ -153,6 +153,18 @@ class App extends React.Component {
 
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
+    var renderMe;
+    if(this.state.loggedIn === true){
+      renderMe = <Info
+        doctors={this.state.doctors}
+        getMapApi={this.getMapApi}
+        location={this.state.location}
+        onDoctorClick={this.onDoctorClick.bind(this)}
+        latLong={this.state.latLong}
+      />;
+    }else{
+      renderMe = <h1 className="GRAVE">FIND A GRAVE SHMUCK</h1>;
+    }
     return (
       <div className="app">
         <NavBar
@@ -170,13 +182,7 @@ class App extends React.Component {
           handleSearch={this.handleSearch}
           updateLocation={this.updateLocation}
         />
-        <Info
-          doctors={this.state.doctors}
-          getMapApi={this.getMapApi}
-          location={this.state.location}
-          onDoctorClick={this.onDoctorClick.bind(this)}
-          latLong={this.state.latLong}
-        />
+        {renderMe}
         <MuiThemeProvider>
         <div className='login-button-navWrapper'>
           <RaisedButton label="Login" primary={true}
