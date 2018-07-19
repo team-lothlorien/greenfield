@@ -5,12 +5,12 @@ import MapContainer from './Map.jsx';
 
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
-  console.log('in docs',props.latLong)
+  
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">
-          <DoctorList 
-            doctors={props.doctors} 
+          <DoctorList
+            doctors={props.doctors}
             onDoctorClick={props.onDoctorClick}
           />
           <div className="map"><MapContainer
