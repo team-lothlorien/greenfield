@@ -40,7 +40,6 @@ var Info = (props) => {
         <div className="bodyWrapper">
           <div id="land">Landing view</div>
           </div>
-        </div>
         )
     }
 }
