@@ -15,9 +15,10 @@ class App extends React.Component {
     this.state = {
       doctors: [],
       compare: [],
+      favorites: [],
       location: '',
       latLong: '',
-      loggedIn: false
+      loggedIn: true
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -101,7 +102,15 @@ class App extends React.Component {
 
   }
   onDoctorClick(doctor){
-    this.setState({doctors: [doctor]})
+    console.log('in doctor')
+    if (this.state.loggedIn) {
+      let temp = this.state.favorites.slice();
+      temp.push(doctor);
+      this.setState({favorites: temp});
+      // persist to the users favorites
+    } else {
+      this.setState({doctors: [doctor]})
+    }    
   }
 
   getDoctors() {
@@ -134,6 +143,8 @@ class App extends React.Component {
           location={this.state.location}
           onClick={this.onDoctorClick.bind(this)}
           latLong={this.state.latLong}
+          favorites={this.state.favorites}
+          loggedIn={this.state.favorites}
         />
       </div>
     );

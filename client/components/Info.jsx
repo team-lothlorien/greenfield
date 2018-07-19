@@ -2,12 +2,18 @@ import React from 'react';
 import DoctorList from './DoctorList.jsx';
 import MapContainer from './Map.jsx';
 
+
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">
-          <DoctorList doctors={props.doctors} onClick={props.onClick}/>
+          <DoctorList 
+            doctors={props.doctors} 
+            onClick={props.onClick}
+            favorites={props.favorites}
+            loggedIn={props.loggedIn}
+          />
           <div className="map"><MapContainer
             location={props.location}
             className="map"
