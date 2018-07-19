@@ -17,10 +17,6 @@
   width: 150px;
 }
 
-.dList {
-  width: 50%;
-}
-
 img {
   display: block;
 }
@@ -40,7 +36,6 @@ h1 {
 
 .dList {
   width: 50%;
-  top: 250px;
   position: relative;
   z-index: -1;
 }
@@ -85,7 +80,11 @@ label, label * {
 
 /* Main view */
 
-.bodyWrapper {}
+.bodyWrapper {
+  position: relative;
+  top: 232px;
+  z-index: -1;
+}
 
 /* Auto Select */
 
@@ -105,7 +104,7 @@ h1 {
 }
 
 .react-autosuggest__input {
-  height: 2vw;
+  height: 1vw;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;

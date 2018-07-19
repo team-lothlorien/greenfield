@@ -111,8 +111,6 @@ class App extends React.Component {
           location={this.state.location}
           onClick={this.onDoctorClick.bind(this)}
         />
-        <Signup/>
-        <Login/>
       </div>
     );
   }
