@@ -5,4 +5,4 @@ server/config.js
 client/dist/bundle.js
 .eslintrc.js
 db/sqlite3.exe
-db/whatupdoc.sqlite3
+db/whatsupdoc.sqlite

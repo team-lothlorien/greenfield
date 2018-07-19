@@ -5,7 +5,7 @@ import MapContainer from './Map.jsx';
 
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
-  console.log('in docs',props.latLong)
+  
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">

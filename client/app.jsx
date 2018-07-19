@@ -27,9 +27,11 @@ class App extends React.Component {
       location: '',
       latLong: '',
       loggedIn: false,
-      isHidden: true
-
+      isHidden: true,
+      renderSignup: false
     };
+
+
     this.createUser = this.createUser.bind(this);
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -39,6 +41,9 @@ class App extends React.Component {
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.saveDoctor = this.saveDoctor.bind(this);
+    this.saveQueries = this.saveQueries.bind(this);
+    this.toggleHidden = this.toggleHidden.bind(this);
+    this.clickSignup = this.clickSignup.bind(this);
   }
 
   toggleHidden () {
@@ -49,22 +54,23 @@ class App extends React.Component {
 
   componentDidMount() {
     this.checkSession();
-
   }
+
   checkSession() {
     axios.get('/authenticate')
     .then(resp => {
-      console.log('checksession:', resp.data.username);
-      if (resp.data) {
+      console.log('checksession:', resp.data);
+      if (resp.data.status) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          user: resp.data.user
         });
       }
-    });
+    })
+    .catch(err => console.log('bad response'));
   }
 
   swapFav () {
-
   }
 
   takeUsToHomePage (event) {
@@ -108,16 +114,6 @@ class App extends React.Component {
     this.getMapApi(location);
   }
 
-
-
-
-
-
-
-
-
-
-
   onDoctorClick(doctor) {
     if (this.state.loggedIn) {
       this.saveDoctor(doctor);
@@ -129,6 +125,19 @@ class App extends React.Component {
   getDoctors() {
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   saveDoctor(doctor) {
     console.log(doctor);
@@ -146,19 +155,35 @@ class App extends React.Component {
 
   }
 
+
+  saveQueries(query) {
+    console.log('saveQueries fired');
+    axios.post('/queries', {
+      user: this.state.user || null,
+      query: query,
+      timeStamp: Date.now()
+    })
+    .then(console.log('Queries SAVED!'));
+
+  }
+
+
   createUser(username) {
     this.setState({
       user: username
-    }, () => [
-      console.log('CREATEUSER:', this.state.user)
-    ]);
+    });
   }
-
+  clickSignup() {
+    console.log('signupClick');
+    this.setState({
+      renderSignup: !this.state.renderSignup
+    });
+  }
 
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
-    if(this.state.loggedIn !== true){
+    if (this.state.loggedIn !== true) {
       renderMe = <Info
         doctors={this.state.doctors}
         getMapApi={this.getMapApi}
@@ -166,7 +191,7 @@ class App extends React.Component {
         onDoctorClick={this.onDoctorClick.bind(this)}
         latLong={this.state.latLong}
       />;
-    }else{
+    } else {
       renderMe = <h1 className="GRAVE">FIND A GRAVE SHMUCK</h1>;
     }
     return (
@@ -175,26 +200,25 @@ class App extends React.Component {
           takeUsToHomePage={this.takeUsToHomePage}
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={this.takeUsToLoginPage}
+          toggleHidden={this.toggleHidden}
+          isHidden={this.state.isHidden}
+          createUser={this.createUser}
+          clickSignup={this.clickSignup}
+
         />
         <Search
           handleSearch={this.handleSearch}
           updateLocation={this.updateLocation}
+          saveQueries={this.saveQueries}
         />
         {renderMe}
-        {/*<MuiThemeProvider>
-          <div className='login-button-navWrapper'>
-            <RaisedButton label="Login" primary={true}
-              style={style} onClick={(event) => this.toggleHidden(event)}/>
-            </div>
-            {!this.state.isHidden && <div className='login-wrapper'><Login createUser={this.createUser}className='login-modal'/></div>}
-          </MuiThemeProvider>
-          <Signup/>*/}
-        </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
 
 
 
-ReactDOM.render(<App />, document.getElementById('app'));
+
+  ReactDOM.render(<App />, document.getElementById('app'));
