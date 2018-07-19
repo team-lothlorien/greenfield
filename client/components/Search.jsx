@@ -2,47 +2,21 @@ import React from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 
-//Languages
-const languages = [ { name: 'Mandarin Chinese' },
-  { name: 'Spanish' },
-  { name: 'English' },
-  { name: 'Hindi/Urdu' },
-  { name: 'Arabic' },
-  { name: 'Bengali' },
-  { name: 'Portuguese' },
-  { name: 'Russian' },
-  { name: 'Japanese' },
-  { name: 'German' },
-  { name: 'Javanese' },
-  { name: 'Punjabi' },
-  { name: 'Wu' },
-  { name: 'French' },
-  { name: 'Telugu' },
-  { name: 'Vietnamese' },
-  { name: 'Marathi' },
-  { name: 'Korean' },
-  { name: 'Tamil' },
-  { name: 'Italian' },
-  { name: 'Turkish' },
-  { name: 'Cantonese/Yue' } ];
-
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterCurrentlySelected: 'Keyword',
+      filterCurrentlySelected: 'Symptoms',
       // term: '',
       location: '',
-      conditions: [],
+      Data: [],
       value: '',
       suggestions: []
     };
 
     this.onFilterChange = this.onFilterChange.bind(this);
-    // this.onTermChange = this.onTermChange.bind(this);
-
+    this.clearInputFields = this.clearInputFields.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
-    //AUTOSUGGEST
     this.onSuggestChange = this.onSuggestChange.bind(this);
     this.getConditions = this.getConditions.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
@@ -54,54 +28,29 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('components did mount fired')
-    // this.getConditions();
+    this.getConditions(this.state.filterCurrentlySelected);
   }
 
-
-
-  getConditions() {
-    console.log('TERM:', this.state.term);
-    console.log('VALUE:', this.state.value);
-
-    //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
-    // if (this.state.filterCurrentlySelected === 'Keyword') {
-    //   axios.get('https://api.betterdoctor.com/2016-03-01/doctors?location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=f695212b8cce3cacd996361881ce040b')
-    //   .then((condition) => {
-    //     console.log('axios condition fired')
-    //     this.setState({conditions: condition.data.data})
-    //   })
-    //   .catch(err => console.log(err));
-    // } else if (this.state.filterCurrentlySelected === 'Symptoms') {
-    //   axios.get('https://api.betterdoctor.com/2016-03-01/conditions?user_key=f695212b8cce3cacd996361881ce040b')
-    //   .then((condition) => {
-    //     console.log('axios symtoms fired')
-    //     this.setState({conditions: condition.data.data})
-    //   })
-    //   .catch(err => console.log(err));
-    // } else if (this.state.filterCurrentlySelected === 'Specialties') {
-    //   axios.get('https://api.betterdoctor.com/2016-03-01/specialties?user_key=f695212b8cce3cacd996361881ce040b')
-    //   .then((condition) => {
-    //     console.log('axios specialties fired');
-
-    //     this.setState({conditions: condition.data.data})
-    //   })
-    //   .catch(err => console.log(err));
-    // } else if (this.state.filterCurrentlySelected === 'Language') {
-    //   this.setState({
-    //     conditions: languages
-    //   });
-    // } else if (this.state.filterCurrentlySelected === 'Insurance') {
-    //   axios.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=f695212b8cce3cacd996361881ce040b')
-    //   .then((condition) => {
-    //     console.log('axios insurance fired');
-
-    //     this.setState({conditions: condition.data.data})
-    //   })
-    //   .catch(err => console.log(err));
-    // }
+  getConditions(val) {
+    if (val === 'Language') {
+      
+      this.setState({
+        Data: languages
+      });
+    } else {
+      axios.get(filterObj[val])
+      .then((results) => {
+        
+        let data = results.data.map((ele) => {
+          return {name: ele};
+        });
+        this.setState({
+          Data: data
+        });
+      })
+      .catch(err => console.log(err));
+    }
   }
-
 
   //***********AUTOSUGGEST**********************//
 
@@ -114,7 +63,7 @@ class Search extends React.Component {
       return [];
     }
     const regex = new RegExp('^' + escapedValue, 'i');
-    return this.state.conditions.filter(condition => regex.test(condition.name));
+    return this.state.Data.filter(ele => regex.test(ele.name));
   }
 
   getSuggestionValue(suggestion) {
@@ -145,33 +94,24 @@ class Search extends React.Component {
     });
   }
 
-
   onFilterChange(event) {
-    this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions());
+    this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions(this.state.filterCurrentlySelected));
+
     event.preventDefault();
   }
-
-  // onTermChange(event) {
-  //   event.preventDefault();
-  //   this.setState({term: event.target.value});
-  // }
-
 
   onLocationChange(event) {
     event.preventDefault();
     this.setState({location: event.target.value});
   }
 
-
-
-  // clearInputFields(event) {
-  //   event.preventDefault();
-  //   this.setState({
-  //     location: '',
-  //     term: '',
-  //     filterCurrentlySelected: '',
-  //   });
-  // }
+  clearInputFields() {
+    this.setState({
+      location: '',
+      value: '',
+      filterCurrentlySelected: '',
+    });
+  }
 
   render() {
     const { value, suggestions } = this.state;
@@ -181,8 +121,7 @@ class Search extends React.Component {
       onChange: this.onSuggestChange
     };
 
-    //temp data until we have an object from
-    let filterOptions = ['Keyword', 'Symptoms', 'Specialties', 'Language', 'Insurance'];
+    let filterOptions = ['Symptoms', 'Specialties', 'Language', 'Insurance'];
     let filterList = filterOptions.map(item => {
       return (
         <option value={item} key={item}>{item}</option>
@@ -193,29 +132,57 @@ class Search extends React.Component {
         <label>
           {"Filter:"}
           <select onChange={this.onFilterChange}>
-          {filterList}
+            {filterList}
           </select>
           <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={this.getSuggestionValue}
-          renderSuggestion={this.renderSuggestion}
-          inputProps={inputProps} />
-        </label>
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={this.getSuggestionValue}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={inputProps} />
+          </label>
 
-        <label>Location:
-        <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
-        <button onClick={() => {
-          this.props.handleSearch(this.state.value, this.state.location);
-          this.props.updateLocation(this.state.location);
-        }
-      }>search</button>
+          <label>Location:
+            <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
+            <button onClick={() => {
+              this.props.handleSearch(this.state.value, this.state.location); this.clearInputFields();
+            }
+          }>search</button>
         </label>
       </div>
     );
   }
 }
 
+const languages = [ { name: 'Mandarin Chinese' },
+{ name: 'Spanish' },
+{ name: 'English' },
+{ name: 'Hindi/Urdu' },
+{ name: 'Arabic' },
+{ name: 'Bengali' },
+{ name: 'Portuguese' },
+{ name: 'Russian' },
+{ name: 'Japanese' },
+{ name: 'Punjabi' },
+{ name: 'Wu' },
+{ name: 'French' },
+{ name: 'Telugu' },
+{ name: 'Vietnamese' },
+{ name: 'Marathi' },
+{ name: 'Korean' },
+{ name: 'Tamil' },
+{ name: 'Italian' },
+{ name: 'Turkish' },
+{ name: 'Cantonese/Yue' }];
+
+
+const filterObj = {
+  Keyword: '/search',
+  Symptoms: '/conditions',
+  Specialties: '/specialties',
+  Language: languages,
+  Insurance: '/insurance'
+};
 
 export default Search;

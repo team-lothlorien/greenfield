@@ -17,7 +17,7 @@ class App extends React.Component {
       compare: [],
       location: '',
       latLong: '',
-      loggedIn: false
+      loggedIn: true
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -26,6 +26,7 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
+    this.saveDoctor = this.saveDoctor.bind(this);
 
   }
 
@@ -92,24 +93,29 @@ class App extends React.Component {
     this.getMapApi(location);
   }
 
-  // componentDidUpdate() {
-  //   console.log('component Did Update...:', this.state.location);
-  //   this.getMapApi(this.state.location)
-  // }
-
-  componentDidMount() {
-
-  }
   onDoctorClick(doctor){
-    this.setState({doctors: [doctor]})
+    console.log('in doctor')
+    if (this.state.loggedIn) {
+      this.saveDoctor(doctor);
+    } else {
+      this.setState({doctors: [doctor]})
+    }    
   }
 
   getDoctors() {
 
   }
 
-  saveDoctor() {
-
+  saveDoctor(doctor) {
+    console.log(doctor);
+    // axios.post('/favorites', {
+    //   params: { 
+    //     username: doctor,
+    //     doctorNPI: doctor.npi,
+    //     doctorData: doctor
+    //   }
+    // })
+    //   .then()
   }
 
   deleteDoctor() {
@@ -132,7 +138,7 @@ class App extends React.Component {
           doctors={this.state.doctors}
           getMapApi={this.getMapApi}
           location={this.state.location}
-          onClick={this.onDoctorClick.bind(this)}
+          onDoctorClick={this.onDoctorClick.bind(this)}
           latLong={this.state.latLong}
         />
       </div>
