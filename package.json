@@ -21,6 +21,7 @@
     "google-map-react": "^1.0.5",
     "knex": "latest",
     "material-ui": "^0.20.1",
+    "moment": "^2.22.2",
     "path": "latest",
     "react": "latest",
     "react-autosuggest": "^9.3.4",
