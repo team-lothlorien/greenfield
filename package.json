@@ -8,6 +8,7 @@
     "react-dev": "webpack --watch -d"
   },
   "dependencies": {
+    "@material-ui/core": "^1.4.0",
     "axios": "latest",
     "babel-core": "latest",
     "babel-loader": "latest",
@@ -20,7 +21,9 @@
     "express-session": "^1.15.6",
     "google-map-react": "^1.0.5",
     "knex": "latest",
+
     "material-ui": "^0.20.1",
+
     "moment": "^2.22.2",
     "path": "latest",
     "react": "latest",
