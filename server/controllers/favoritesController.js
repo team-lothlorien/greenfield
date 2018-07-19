@@ -1,32 +1,35 @@
 var favoritesModel = require('../models/favoritesModel.js');
-var url = require('url');
 
 module.exports = {
   get: (req, res) => {
-    var url_parts = url.parse(req.url, true);
-    var query = url_parts.query;
-    favoritesModel.getFavorites()
-
+    let username = req.query.username;
+    favoritesModel.getFavorites(username)
       .then ((data) => {
-        res.send(data);
+        console.log(typeof data);
+        res.json(data);
       })
       .catch ((err) => {
         console.log(err);
       });
   },
   post: (req, res) => {
-    favoritesModel.saveFavorites()
-      .then ((data) => {
-        res.send(data);
+    let username = req.body.username;
+    let doctorNPI = req.body.doctorNPI;
+    let doctorData = req.body.doctorData;
+    favoritesModel.saveFavorites(username, doctorNPI, doctorData)
+      .then (() => {
+        res.sendStatus(200);
       })
       .catch ((err) => {
-        console.log(err);
+        console.log('Error saving doctor to favorites: ', err);
       });
   },
   delete: (req, res) => {
-    favoritesModel.deleteFavorites()
-      .then ((data) => {
-        res.send(data);
+    let username = req.body.username;
+    let doctorNPI = req.body.doctorNPI;
+    favoritesModel.deleteFavorites(username, doctorNPI)
+      .then (() => {
+        res.sendStatus(200);
       })
       .catch ((err) => {
         console.log(err);
