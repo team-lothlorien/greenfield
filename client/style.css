@@ -1,3 +1,7 @@
+body {
+  height: 10000px;
+}
+
 .dleCard {
   float: left;
   margin-left: 4%;
@@ -94,7 +98,7 @@ h1 {
 }
 
 #land {
-  background-image: url("https://i.imgflip.com/11n39t.jpg");
+  /* background-image: url("https://i.imgflip.com/11n39t.jpg"); */
   background-repeat: no-repeat;
   height: 500px;
   width: auto;
