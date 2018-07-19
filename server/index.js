@@ -86,6 +86,7 @@ app.post('/login', (req, response) => {
       bcrypt.compare(password, resp[0].password, (err, res) => {
         if (res) {
           req.session.regenerate(() => {
+            req.session.username = username;
             response.status(201);
             console.log('Password Matched! redirecting....');
           });
