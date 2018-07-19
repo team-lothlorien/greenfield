@@ -5,13 +5,16 @@ import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
 
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       doctors: [],
       compare: [],
-      location: ''
+      location: '',
+      loggedIn: false
     };
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
@@ -19,9 +22,28 @@ class App extends React.Component {
     this.swapFav = this.swapFav.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
+
   }
 
-  swapFav (){
+  componentDidMount() {
+    this.checkSession();
+
+  }
+  checkSession() {
+    axios.get('/authenticate')
+    .then(resp => {
+      if (resp.data) {
+        this.setState({
+          loggedIn: true
+        });
+      }
+    });
+  }
+
+
+
+
+  swapFav () {
 
   }
 
@@ -56,9 +78,6 @@ class App extends React.Component {
       .catch( err => console.log(err))
   }
 
-  componentDidMount() {
-
-  }
   onDoctorClick(doctor){
     this.setState({doctors: [doctor]})
   }

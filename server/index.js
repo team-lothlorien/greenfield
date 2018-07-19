@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 //Authentication
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const knex = require('../db/index.js');
@@ -43,18 +43,18 @@ app.use('/comments', commentsRouter);
 app.use('/location', locationRouter);
 // app.use('/user', userRouter);
 
-//Authentication
 
+//Authentication
 app.post('/signup', (req, res) => {
   let saltRounds = 10;
   let username = req.body.username;
-  let password = req.body;
+  let password = req.body.password;
   let firstName = req.body.firstName;
-  let lastName = req.body.lasName;
+  let lastName = req.body.lastName;
   let zipCode = req.body.zipCode;
   let email = req.body.email;
   bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
+    bcrypt.hash(password, salt, null, (err, hash) => {
       knex('Users').insert({
         username: username,
         password: hash,
@@ -66,13 +66,15 @@ app.post('/signup', (req, res) => {
       .then(resp => {
         console.log(`${username} added to db`);
         req.session.regenerate(() => {
-          req.session.user = username;
+          req.session.username = username;
         });
       })
-      .catch(err => console.log('Input not accepted', err));
+      .catch(err => { res.status(401).send(err); });
     });
   });
 });
+
+
 
 app.post('/login', (req, response) => {
   let username = req.body.username;
@@ -92,7 +94,16 @@ app.post('/login', (req, response) => {
         console.log('password did not match');
       }
     });
-  });
+  })
+  .catch(err => console.log(err));
+});
+
+app.post('/logout', (req, res) => {
+  req.session.destroy();
+});
+
+app.get('/authenticate', (req, res) => {
+  res.send(req.session.username ? !!req.session.username : false);
 });
 
 
@@ -100,49 +111,6 @@ app.post('/login', (req, response) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.post('/login', (req, res) => {
-//   let username = req.body.username;
-//   let enteredPassword = req.body.password;
-//   kn
-// })
-
-
-
-
-
-// app.get('/login', (req,res) => {
-//   res.redirect('/');
-// });
-
-app.get('/logout', (req, res) => {
-  req.session.destroy(function(err) {
-    res.redirect('/');
-  });
-});
 
 let port = process.env.PORT || 3000;
 //creates server connection
