@@ -15,6 +15,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      invalidUser: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +34,15 @@ class Login extends React.Component {
     })
     .then(resp => {
       console.log('RESPONSE:', resp);
+      if (resp.data.status === 'badUser') {
+        this.setState({
+          invalidUser: true
+        }, () => {
+          alert('Invalid Username!');
+        });
+      } else if (resp.data.status === 'badPassword') {
+        alert('Invalid Password!');
+      }
     })
     .catch(err => {
       console.log('ERROR:', err);
@@ -49,14 +59,14 @@ class Login extends React.Component {
             <AppBar title="Login"/>
             <TextField
               hintText="Enter your Username"
-              floatingLabelText="Username"
+              // floatingLabelText="Username"
               id="username"
               onChange={this.handleChange}
             />
             <br/>
             <TextField
               hintText="Enter your Password"
-              floatingLabelText="Password"
+              // floatingLabelText="Password"
               id="password"
               type="password"
               onChange={this.handleChange}

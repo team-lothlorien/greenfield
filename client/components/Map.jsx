@@ -78,7 +78,8 @@ class MapContainer extends React.Component {
     if (this.props.doctors !== '[]' || this.props.doctors === undefined ) {
       matchedDocs = findClosestDoctors(this.props.doctors);
     }
-     console.log('latlong', this.props.latLong);
+
+
     return (
 
       <div style={{ height: '609px', width: '50%' ,padding: '2px'}}>
@@ -91,10 +92,10 @@ class MapContainer extends React.Component {
               : { lat: 40.730610, lng: -73.935242 }
           }
 
-            
+
           defaultZoom={defaultProps.zoom}
         >
-        <UserMarker 
+        <UserMarker
           key={this.props.latLong[0]}
           lat={this.props.latLong[0]}
           lat={this.props.latLong[1]}
@@ -102,7 +103,7 @@ class MapContainer extends React.Component {
         {
           matchedDocs.length !== undefined
             ? matchedDocs.map( doc => {
-              return ( 
+              return (
                 <Marker
                   key={doc.lat}
                   lat={doc.lat}
