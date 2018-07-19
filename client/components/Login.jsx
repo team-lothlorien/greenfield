@@ -34,6 +34,7 @@ class Login extends React.Component {
     })
     .then(resp => {
       console.log('RESPONSE:', resp);
+
       if (resp.data.status === 'badUser') {
         this.setState({
           invalidUser: true
@@ -42,6 +43,8 @@ class Login extends React.Component {
         });
       } else if (resp.data.status === 'badPassword') {
         alert('Invalid Password!');
+      } else {
+        this.props.createUser(this.state.username);
       }
     })
     .catch(err => {

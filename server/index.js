@@ -85,18 +85,19 @@ app.post('/login', (req, response) => {
     if (resp[0]) {
       bcrypt.compare(password, resp[0].password, (err, res) => {
         if (res) {
+          req.session.username = username;
           req.session.regenerate(() => {
             req.session.username = username;
             response.status(201);
+            response.send(req.session);
             console.log('Password Matched! redirecting....');
           });
         } else {
-
+          response.status(401);
           response.send({status: 'badPassword'});
           console.log('password did not match');
         }
       });
-      //TEMP FIX UNTIL I FIND OUT HOW TO CALL THE CATCH;
     } else {
       console.log('Username not in database');
       response.send({status: 'badUser'});
@@ -105,14 +106,18 @@ app.post('/login', (req, response) => {
   .catch(err => console.log('ERROR CAUGHT:', err));
 });
 
+<<<<<<< HEAD
 app.post('/queries', (req, res) => {
 
 });
 
 
+=======
+>>>>>>> dev
 app.post('/logout', (req, res) => {
   req.session.destroy();
 });
+
 
 app.get('/authenticate', (req, res) => {
   res.send(req.session.username ? !!req.session.username : false);
