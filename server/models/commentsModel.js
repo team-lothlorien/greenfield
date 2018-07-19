@@ -3,25 +3,28 @@ const moment = require('moment')
 
 
 let saveComments = (doctorId, username, comment) => {
+  let date = moment().format('MMMM Do, YYYY');
   return db('Comments').insert({
     doctorId: doctorId,
     username: username,
     comment: comment,
-    date: moment().format('MMMM Do, YYYY')
+    date: date
   })
 };
 
-let getComments = () => {
-  return db.select()
+let getComments = (doctorId) => {
+  return db('Comments')
+  .where('doctorId', doctorId)
+  .select()
   .table('Comments')
 };
 
-let editComments = () => {
+// let editComments = () => {
 
-};
+// };
 
 let deleteComments = (username, doctorId) => {
-  db('Comments')
+  return db('Comments')
   .where({
     username: username,
     doctorId: doctorId
@@ -32,5 +35,5 @@ let deleteComments = (username, doctorId) => {
 
 module.exports.saveComments = saveComments;
 module.exports.getComments = getComments;
-module.exports.editComments = editComments;
+// module.exports.editComments = editComments;
 module.exports.deleteComments = deleteComments;
