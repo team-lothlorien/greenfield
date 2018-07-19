@@ -105,6 +105,10 @@ app.post('/login', (req, response) => {
   .catch(err => console.log('ERROR CAUGHT:', err));
 });
 
+app.post('/queries', (req, res) => {
+
+});
+
 
 app.post('/logout', (req, res) => {
   req.session.destroy();

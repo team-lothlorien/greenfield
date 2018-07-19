@@ -51,15 +51,10 @@ class App extends React.Component {
     });
   }
 
-
-
-
-
-
   componentDidMount() {
     this.checkSession();
-
   }
+
   checkSession() {
     axios.get('/authenticate')
     .then(resp => {
@@ -71,11 +66,7 @@ class App extends React.Component {
     });
   }
 
-
-
-
   swapFav () {
-
   }
 
   takeUsToHomePage (event) {
@@ -97,10 +88,10 @@ class App extends React.Component {
         location: location,
       }
     })
-      .then( response => {
-        this.setState({doctors: response.data});
-      })
-      .catch( err => console.log(err));
+    .then( response => {
+      this.setState({doctors: response.data});
+    })
+    .catch( err => console.log(err));
   }
 
   getMapApi(location) {
@@ -109,11 +100,12 @@ class App extends React.Component {
         location: location
       }
     })
-      .then( response => {
-        this.setState({ latLong: [response.data[0], response.data[1]] })
-      })
-      .catch( err => console.log(err))
+    .then( response => {
+      this.setState({ latLong: [response.data[0], response.data[1]] })
+    })
+    .catch( err => console.log(err))
   }
+
 
   updateLocation(location) {
     this.getMapApi(location);
@@ -129,7 +121,6 @@ class App extends React.Component {
     }
 
   }
-
 
   getDoctors() {
 
@@ -151,6 +142,26 @@ class App extends React.Component {
 
   }
 
+  saveQueries(query) {
+    app.post('/queries', {
+      user: this.state.user || null,
+      query: query,
+      timeStamp: Data.now()
+    })
+    .then()
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     return (
@@ -169,6 +180,7 @@ class App extends React.Component {
         <Search
           handleSearch={this.handleSearch}
           updateLocation={this.updateLocation}
+          saveQueries={this.saveQueries}
         />
         <Info
           doctors={this.state.doctors}
