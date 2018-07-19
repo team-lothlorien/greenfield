@@ -75,8 +75,10 @@ class Login extends React.Component {
               onChange={this.handleChange}
             />
           <br/>
-          <RaisedButton label="Submit" primary={true}
+          <RaisedButton label="Login" primary={true}
             style={style} onClick={(event) => this.handleSubmit(event)}/>
+            <RaisedButton label="Signup" primary={true}
+              style={style} onClick={() => this.props.clickSignup()}/>
           </div>
         </MuiThemeProvider>
       </div>
