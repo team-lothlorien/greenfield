@@ -5,7 +5,6 @@ module.exports = {
     let username = req.query.username;
     favoritesModel.getFavorites(username)
       .then ((data) => {
-        console.log(typeof data);
         res.json(data);
       })
       .catch ((err) => {

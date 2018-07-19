@@ -26,8 +26,7 @@ class App extends React.Component {
       compare: [],
       location: '',
       latLong: '',
-      loggedIn: false,
-      isHidden: true
+      loggedIn: false
     };
     this.createUser = this.createUser.bind(this);
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
@@ -36,7 +35,6 @@ class App extends React.Component {
     this.swapFav = this.swapFav.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
-    this.updateLocation = this.updateLocation.bind(this);
     this.saveDoctor = this.saveDoctor.bind(this);
   }
 
@@ -79,6 +77,8 @@ class App extends React.Component {
     // do something to change info section
   }
   handleSearch(term, location) {
+    this.getMapApi(location);
+    console.log('handleSearch',location)
     axios.get('/search', {
       params: {
         term: term,
@@ -97,27 +97,14 @@ class App extends React.Component {
         location: location
       }
     })
-    .then( response => {
-      this.setState({ latLong: [response.data[0], response.data[1]] });
-    })
-    .catch( err => console.log(err));
+      .then( response => {
+        console.log('in getMapApi',this.state.latLong)
+        this.setState({ latLong: [response.data[0], response.data[1]] })
+      })
+      .catch( err => console.log(err))
   }
 
-  updateLocation(location) {
-    this.getMapApi(location);
-  }
-
-
-
-
-
-
-
-
-
-
-
-  onDoctorClick(doctor) {
+  onDoctorClick(doctor){
     if (this.state.loggedIn) {
       this.saveDoctor(doctor);
     } else {
@@ -130,15 +117,14 @@ class App extends React.Component {
   }
 
   saveDoctor(doctor) {
-    console.log(doctor);
-    // axios.post('/favorites', {
-    //   params: {
-    //     username: doctor,
-    //     doctorNPI: doctor.npi,
-    //     doctorData: doctor
-    //   }
-    // })
-    //   .then()
+    axios.post('/favorites', {
+      params: { 
+        username: this.state.user,
+        doctorNPI: +doctor.npi, // hack to convert string to number   +'123'
+        doctorData: doctor
+      }
+    })
+    .catch( err => console.log(err));
   }
 
   deleteDoctor() {
@@ -175,9 +161,8 @@ class App extends React.Component {
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={this.takeUsToLoginPage}
         />
-        <Search
-          handleSearch={this.handleSearch}
-          updateLocation={this.updateLocation}
+        <Search 
+          handleSearch={this.handleSearch} 
         />
         {renderMe}
         <MuiThemeProvider>
