@@ -1,33 +1,30 @@
 import React from 'react';
-import axios from 'axios';
 import CommentList from './CommentList.jsx';
 
 class CommentBox extends React.Component{
   // constructor(props){
   //   super(props);
   //   this.state = {
-  //     input = '',
-  //     comments = [],
+  //     input: '',
+  //     comments: [],
   //   }
   // }
-  state = {
-    input: '',
-    comments: [],
-  }
+  state = { input: '', comments: [] };
   
-  componentDidMount = () => {
+  componentDidMount() {
     this.getComments();
   }
 
-  handleInputChange = (e) => {
-    this.setState({
-      input: e.target.value
-    })
-  }
-  getComments() {
-    axios
-  }
-  return(
+  // handleInputChange (e) {
+  //   this.setState({
+  //     input: e.target.value
+  //   })
+  // }
+  // getComments() {
+  //   axios
+  // }
+  render() {
+    return(
     <div className="CommentBoxCard">
       {/* Comment Box Text Input Here */}
       {/* Comment Box Submit Button Here */}
@@ -35,7 +32,8 @@ class CommentBox extends React.Component{
       <CommentList comments={this.state.comments}/>
       {/* If currUser = username, conditional render of delete comment */}
     </div>
-  );
+  )
+  }
 }
 
 export default CommentBox;
