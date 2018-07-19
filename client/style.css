@@ -1,7 +1,21 @@
 .dleCard {
   float: left;
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-left: 4%;
+  margin-right: 4%;
+  width: 200px;
+  height: 200px
+
+}
+
+.dCard {
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 1%;
+}
+
+.dleImage {
+  height: 150px;
+  width: 150px;
 }
 
 img {
@@ -35,6 +49,11 @@ h1 {
   font-size: 2vw;
   height: 80px;
   justify-content: space-around;
+}
+
+/* Main view */
+.bodyWrapper {
+  
 }
 
 /* Auto Select */

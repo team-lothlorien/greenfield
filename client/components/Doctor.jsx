@@ -7,7 +7,6 @@ var Doctor = (props) => {
         <img className="dImage" src={props.doctor.profile.image_url}></img>
       </div>
       <div className="dSummary">
-        <img src={props.doctor.ratings[0].image_url_small}></img>
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
         <p className="dBio">Bio: {props.doctor.profile.bio}</p>
       </div>
