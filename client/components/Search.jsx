@@ -33,14 +33,14 @@ class Search extends React.Component {
 
   getConditions(val) {
     if (val === 'Language') {
-      
+
       this.setState({
         Data: languages
       });
     } else {
       axios.get(filterObj[val])
       .then((results) => {
-        
+
         let data = results.data.map((ele) => {
           return {name: ele};
         });
@@ -147,6 +147,7 @@ class Search extends React.Component {
             <input type="text" value={this.state.location} onChange={this.onLocationChange}/>
             <button onClick={() => {
               this.props.handleSearch(this.state.value, this.state.location); this.clearInputFields();
+              this.props.saveQueries(this.state.value);
             }
           }>search</button>
         </label>
