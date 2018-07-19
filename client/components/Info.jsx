@@ -10,9 +10,7 @@ var Info = (props) => {
         <div className="bodyWrapper">
           <DoctorList 
             doctors={props.doctors} 
-            onClick={props.onClick}
-            favorites={props.favorites}
-            loggedIn={props.loggedIn}
+            onDoctorClick={props.onDoctorClick}
           />
           <div className="map"><MapContainer
             location={props.location}
