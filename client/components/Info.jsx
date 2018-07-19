@@ -9,8 +9,8 @@ var Info = (props) => {
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">
-          <DoctorList 
-            doctors={props.doctors} 
+          <DoctorList
+            doctors={props.doctors}
             onDoctorClick={props.onDoctorClick}
           />
           <div className="map"><MapContainer
@@ -39,12 +39,6 @@ var Info = (props) => {
       return (
         <div className="bodyWrapper">
           <div id="land">Landing view</div>
-          <div className="map"><MapContainer
-            location={props.location}
-            className="map"
-            latLong={props.latLong}
-            doctors={props.doctors}
-          />
           </div>
         </div>
         )
