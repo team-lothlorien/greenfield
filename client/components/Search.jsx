@@ -26,6 +26,16 @@ const languages = [ { name: 'Mandarin Chinese' },
   { name: 'Turkish' },
   { name: 'Cantonese/Yue' } ];
 
+const filterObj = {
+  Keyword: '/search',
+  Symptoms: '/conditions',
+  Specialties: '/specialties',
+  Language: languages,
+  Insurance: '/insurance'
+};
+
+// ['Keyword', 'Symptoms', 'Specialties', 'Language', 'Insurance']
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -60,9 +70,18 @@ class Search extends React.Component {
 
 
 
-  getConditions() {
-    console.log('TERM:', this.state.term);
-    console.log('VALUE:', this.state.value);
+  getConditions(val) {
+    console.log(val);
+    axios.get(filterObj[val])
+    .then((results) => {
+      let data = results.data.map((ele) => {
+        return {name: ele};
+      });
+      this.setState({
+        conditions: data
+      });
+    })
+    .catch(err => console.log(err));
 
     //AUTOCOMPLETE WAITING FOR SERVER ENDPOINTS TEMP SOLUTION
     // if (this.state.filterCurrentlySelected === 'Keyword') {
@@ -147,7 +166,8 @@ class Search extends React.Component {
 
 
   onFilterChange(event) {
-    this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions());
+    this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions(this.state.filterCurrentlySelected));
+
     event.preventDefault();
   }
 
