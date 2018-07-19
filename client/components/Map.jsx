@@ -83,7 +83,6 @@ class MapContainer extends React.Component {
     }
 
 
-
     return (
 
       <div style={{ height: '609px', width: '50%' ,padding: '2px'}}>
