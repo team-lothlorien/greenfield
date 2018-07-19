@@ -10,9 +10,13 @@ module.exports = {
     .then(data => {
       return apiHelper.findDoctors(query, data[0], data[1])
     })
+    .then(map => {
+      res.status(200).send(map)
+    })
     .then(doctors => {
       return res.status(200).send(doctors);
     })
     .catch(err => console.error('Error fetching doctors: ', err))
   }
 }
+

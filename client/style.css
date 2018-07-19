@@ -1,24 +1,49 @@
+.app {
+  height: 0vh;
+}
+
 .dleCard {
   float: left;
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-left: 50px;
   width: 200px;
-  height: 200px
+  height: 200px;
+  border: thin solid black;
+  border-radius: 20px;
+  margin-top: 5px;
+  background-color: rgb(103, 139, 204)
+}
+
+.spacer {
+  font-size: 0em;
+  display: block;
+  clear: both;
+  visibility: hidden;
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-left: 50px;
+  width: 200px;
+  height: 38px;
+  border: thin solid black;
+  border-radius: 20px;
+  margin-top: 5px;
+  background-color: rgb(103, 139, 204);
 }
 
 .dCard {
-  margin-left: 30%;
-  margin-right: 30%;
+  padding: 5px;
+  margin-left: 1%;
+  margin-right: 55%;
   margin-top: 1%;
+  text-align: justify;
+  border: thin solid black
 }
 
 .dleImage {
   height: 150px;
   width: 150px;
-}
-
-.dList {
-  width: 50%;
 }
 
 img {
@@ -31,16 +56,25 @@ h1 {
   font-size: 4vw;
 }
 
+footer {
+  position: fixed;
+  top: 95.1%;
+  display: -webkit-box;
+  height: 125px;
+  width: 100%;
+  background-color: rgb(103, 139, 204);
+}
+
 .map {
   position: fixed;
-  width: 100%;
+  width: 99%;
   top: 240px;
   left: 50%;
 }
 
 .dList {
+  padding-left: 50px;
   width: 50%;
-  top: 250px;
   position: relative;
   z-index: -1;
 }
@@ -85,7 +119,17 @@ label, label * {
 
 /* Main view */
 
-.bodyWrapper {}
+body {
+  margin: 0;
+  background: bisque;
+}
+
+.bodyWrapper {
+  position: relative;
+  height: 71.3vh;
+  top: 240px;
+  z-index: -1;
+}
 
 /* Auto Select */
 
@@ -94,7 +138,7 @@ h1 {
 }
 
 #land {
-  background-image: url("https://i.imgflip.com/11n39t.jpg");
+  /* background-image: url("https://i.imgflip.com/11n39t.jpg"); */
   background-repeat: no-repeat;
   height: 500px;
   width: auto;
@@ -105,7 +149,7 @@ h1 {
 }
 
 .react-autosuggest__input {
-  height: 2vw;
+  height: 1vw;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
@@ -130,7 +174,7 @@ h1 {
 .react-autosuggest__container--open .react-autosuggest__suggestions-container {
   display: block;
   position: absolute;
-  top: 220px;
+  top: 54px;
   width: 280px;
   border: 1px solid #aaa;
   background-color: #fff;
