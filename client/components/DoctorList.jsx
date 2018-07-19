@@ -5,7 +5,7 @@ var DoctorList = (props) => {
     return <DoctorListEntry doctor={doctor} key={doctor.uid} onClick={props.onClick}/>;
   });
   return(
-    <div>{DoctorListEntries}</div>
+    <div className="dList">{DoctorListEntries}</div>
   );
 };
 
