@@ -10,7 +10,7 @@ let findClosestDoctors = (doctors) => {
   doctors.forEach( doctor => {
     if (doctor.practices.length > 0) {
       doctor.practices.forEach( loc => {
-        
+
         flatObj[loc.distance] = {
           distance: loc.distance,
           lat: loc.lat,
@@ -25,7 +25,7 @@ let findClosestDoctors = (doctors) => {
   for (let key in flatObj) {
     flatArr.push(flatObj[key])
   }
-  
+
   if (flatArr.length < 11) {
     return flatArr;
   }
@@ -35,7 +35,7 @@ let findClosestDoctors = (doctors) => {
 
   let sort = (array) => {
     changes = 0;
-    for(let i = 0; i < array.length; i += 1) { 
+    for(let i = 0; i < array.length; i += 1) {
       if (i !== array.length - 1) {
         //console.log('in sort:', array[i], array[i+1])
         if (array[i].distance > array[i+1].distance) {
@@ -51,10 +51,10 @@ let findClosestDoctors = (doctors) => {
     }
   };
   sort(flatArr);
-  
+
  let only10 = flatArr.slice(0, 10);
- 
-  return only10;
+
+  return flatArr;
 }
 
 const defaultProps = {
@@ -70,34 +70,34 @@ const AnyReactComponent = ({ text }) => <div style={{ height: '10px', width: '10
 
 class MapContainer extends React.Component {
   constructor(props) {
-    super(props) 
+    super(props)
     this.state = {
     }
   }
   render() {
     let matchedDocs;
-    if (this.props.doctors !== '[]' || this.props.doctors === undefined ) {  
+    if (this.props.doctors !== '[]' || this.props.doctors === undefined ) {
       matchedDocs = findClosestDoctors(this.props.doctors);
     }
     console.log(this.props.latLong);
     console.log(matchedDocs);
     return (
-      
-      <div style={{ height: '80vh', width: '80%' }}>
+
+      <div style={{ height: '500px', width: '50%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY_GEO }}
           center={
-            this.props.latLong 
+            this.props.latLong
               ? { lat: this.props.latLong[0], lng: this.props.latLong[1] }
               : { lat: 40.730610, lng: -73.935242 }
-              
+
             }
           defaultZoom={defaultProps.zoom}
         >
         {
-          matchedDocs.length !== undefined 
+          matchedDocs.length !== undefined
             ? matchedDocs.map( doc => {
-              return ( 
+              return (
                 <AnyReactComponent
                   key={doc.lat}
                   lat={doc.lat}
@@ -106,7 +106,7 @@ class MapContainer extends React.Component {
             })
             : ""
         }
-          
+
         </GoogleMapReact>
       </div>
     );
