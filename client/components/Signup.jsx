@@ -9,12 +9,16 @@ const style = {
   margin: 15,
 };
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
+      firstName: '',
+      lastName: '',
+      zipCode: null,
+      email: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,11 +29,16 @@ class Login extends React.Component {
     });
   }
   handleSubmit(event) {
-    console.log('username:', this.state.username);
-    console.log('password:', this.state.password);
-    axios.post('/login', {
+    console.log('ZIPCODEZIPCODE:', this.state.zipcode);
+
+    axios.post('/signup', {
+
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      zipCode: this.state.zipCode,
+      email: this.state.email
     })
     .then(resp => {
       console.log('RESPONSE:', resp);
@@ -46,7 +55,7 @@ class Login extends React.Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar title="Login"/>
+            <AppBar title="Signup"/>
             <TextField
               hintText="Enter your Username"
               floatingLabelText="Username"
@@ -62,6 +71,35 @@ class Login extends React.Component {
               onChange={this.handleChange}
             />
           <br/>
+          <TextField
+            hintText="Enter your First Name"
+            floatingLabelText="First Name"
+            id="firstName"
+            onChange={this.handleChange}
+          />
+          <br/>
+          <TextField
+            hintText="Enter your Last Name"
+            floatingLabelText="Last Name"
+            id="lastName"
+            onChange={this.handleChange}
+          />
+          <br/>
+          <TextField
+            hintText="Enter your Zipcode"
+            floatingLabelText="Zipcode"
+            id="zipCode"
+            onChange={this.handleChange}
+          />
+          <br/>
+          <TextField
+            hintText="Enter your Email"
+            floatingLabelText="Email"
+            id="email"
+            type="email"
+            onChange={this.handleChange}
+          />
+          <br/>
           <RaisedButton label="Submit" primary={true}
             style={style} onClick={(event) => this.handleSubmit(event)}/>
           </div>
@@ -71,4 +109,5 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+
+export default Signup;

@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavBar from './components/NavBar.jsx';
 import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
+import Signup from './components/Signup.jsx';
 import Login from './components/Login.jsx';
 
 
@@ -110,9 +111,12 @@ class App extends React.Component {
           location={this.state.location}
           onClick={this.onDoctorClick.bind(this)}
         />
+        <Signup/>
+        <Login/>
       </div>
     );
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));

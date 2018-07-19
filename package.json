@@ -20,11 +20,13 @@
     "express-session": "^1.15.6",
     "google-map-react": "^1.0.5",
     "knex": "latest",
+    "material-ui": "^0.20.1",
     "path": "latest",
     "react": "latest",
     "react-autosuggest": "^9.3.4",
     "react-dom": "latest",
-    "sqlite3": "^3.1.4",
+    "react-tap-event-plugin": "^3.0.3",
+    "sqlite3": "^3.1.13",
     "webpack": "latest"
   },
   "repository": {
