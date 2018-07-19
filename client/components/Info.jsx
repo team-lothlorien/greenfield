@@ -39,11 +39,7 @@ var Info = (props) => {
       return (
         <div className="bodyWrapper">
           <div id="land">Landing view</div>
-<<<<<<< HEAD
-        </div>
-=======
           </div>
->>>>>>> 9144fe7a34cc536670173f0b7ee3ddbce3eeff81
         )
     }
 }
