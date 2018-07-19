@@ -82,7 +82,7 @@ app.post('/login', (req, response) => {
   knex('Users').where({username: username})
   .select('password')
   .then(resp => {
-    if (resp[0].password) {
+    if (resp[0]) {
       bcrypt.compare(password, resp[0].password, (err, res) => {
         if (res) {
           req.session.regenerate(() => {
@@ -90,20 +90,20 @@ app.post('/login', (req, response) => {
             console.log('Password Matched! redirecting....');
           });
         } else {
-          response.status(401);
-          response.send('WRONG PASSWORD FIND A GRAVE');
+
+          response.send({status: 'badPassword'});
           console.log('password did not match');
         }
       });
       //TEMP FIX UNTIL I FIND OUT HOW TO CALL THE CATCH;
     } else {
-      // console.log(response);
-      response.status(401);
-      response.send({status: false});
+      console.log('Username not in database');
+      response.send({status: 'badUser'});
     }
   })
   .catch(err => console.log('ERROR CAUGHT:', err));
 });
+
 
 app.post('/logout', (req, res) => {
   req.session.destroy();

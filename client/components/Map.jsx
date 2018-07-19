@@ -65,7 +65,9 @@ const defaultProps = {
   zoom: 9
 };
 
-const AnyReactComponent = ({ text }) => <div style={{ height: '10px', width: '10px', background: 'red', borderRadius: '50%' }}>{text}</div>;
+const UserMarker = ({ text }) => <div style={{ height: '15px', width: '15px', background: 'blue', borderRadius: '50%' }}>{text}</div>;
+
+const Marker = ({ text }) => <div style={{ height: '10px', width: '10px', background: 'red', borderRadius: '50%' }}>{text}</div>;
 
 
 class MapContainer extends React.Component {
@@ -79,26 +81,33 @@ class MapContainer extends React.Component {
     if (this.props.doctors !== '[]' || this.props.doctors === undefined ) {
       matchedDocs = findClosestDoctors(this.props.doctors);
     }
-    console.log(this.props.latLong);
-    console.log(matchedDocs);
+
+
     return (
 
       <div style={{ height: '609px', width: '50%' ,padding: '2px'}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY_GEO }}
+          defaultCenter={defaultProps.center}
           center={
             this.props.latLong
               ? { lat: this.props.latLong[0], lng: this.props.latLong[1] }
               : { lat: 40.730610, lng: -73.935242 }
+          }
 
-            }
+
           defaultZoom={defaultProps.zoom}
         >
+        <UserMarker
+          key={this.props.latLong[0]}
+          lat={this.props.latLong[0]}
+          lat={this.props.latLong[1]}
+        />
         {
           matchedDocs.length !== undefined
             ? matchedDocs.map( doc => {
               return (
-                <AnyReactComponent
+                <Marker
                   key={doc.lat}
                   lat={doc.lat}
                   lng={doc.lon}

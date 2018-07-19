@@ -33,14 +33,14 @@ class Search extends React.Component {
 
   getConditions(val) {
     if (val === 'Language') {
-      console.log(val);
+      
       this.setState({
         Data: languages
       });
     } else {
       axios.get(filterObj[val])
       .then((results) => {
-        console.log('Inside THEN:', val);
+        
         let data = results.data.map((ele) => {
           return {name: ele};
         });
