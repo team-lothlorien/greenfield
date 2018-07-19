@@ -148,7 +148,9 @@ class App extends React.Component {
   createUser(username) {
     this.setState({
       user: username
-    });
+    }, () => [
+      console.log('CREATEUSER:', this.state.user)
+    ]);
   }
 
 
