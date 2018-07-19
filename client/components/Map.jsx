@@ -79,8 +79,7 @@ class MapContainer extends React.Component {
     if (this.props.doctors !== '[]' || this.props.doctors === undefined ) {
       matchedDocs = findClosestDoctors(this.props.doctors);
     }
-    console.log(this.props.latLong);
-    console.log(matchedDocs);
+    
     return (
 
       <div style={{ height: '609px', width: '50%' ,padding: '2px'}}>

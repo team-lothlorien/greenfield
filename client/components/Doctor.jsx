@@ -9,6 +9,7 @@ var Doctor = (props) => {
       <div className="dSummary">
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
         <p className="dBio">Bio: {props.doctor.profile.bio}</p>
+        <span className="spacer dleCard"></span>
       </div>
     </div>
   )
