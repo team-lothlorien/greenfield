@@ -6,6 +6,14 @@ import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
 import Signup from './components/Signup.jsx';
 import Login from './components/Login.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
+const style = {
+  margin: 15,
+};
 
 
 
@@ -17,8 +25,14 @@ class App extends React.Component {
       compare: [],
       location: '',
       latLong: '',
-      loggedIn: true
+      loggedIn: false,
+      isHidden: true
     };
+
+
+
+
+
     this.takeUsToHomePage = this.takeUsToHomePage.bind(this);
     this.takeUsToFavoritesPage = this.takeUsToFavoritesPage.bind(this);
     this.takeUsToLoginPage = this.takeUsToLoginPage.bind(this);
@@ -26,9 +40,21 @@ class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
+
     this.saveDoctor = this.saveDoctor.bind(this);
 
+
   }
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
+  }
+
+
+
+
+
 
   componentDidMount() {
     this.checkSession();
@@ -79,8 +105,8 @@ class App extends React.Component {
 
   getMapApi(location) {
     axios.get('/location', {
-      params: { 
-        location: location 
+      params: {
+        location: location
       }
     })
       .then( response => {
@@ -93,14 +119,17 @@ class App extends React.Component {
     this.getMapApi(location);
   }
 
+
   onDoctorClick(doctor){
     console.log('in doctor')
     if (this.state.loggedIn) {
       this.saveDoctor(doctor);
     } else {
       this.setState({doctors: [doctor]})
-    }    
+    }
+
   }
+
 
   getDoctors() {
 
@@ -109,7 +138,7 @@ class App extends React.Component {
   saveDoctor(doctor) {
     console.log(doctor);
     // axios.post('/favorites', {
-    //   params: { 
+    //   params: {
     //     username: doctor,
     //     doctorNPI: doctor.npi,
     //     doctorData: doctor
@@ -123,15 +152,22 @@ class App extends React.Component {
   }
 
   render() {
+    // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     return (
       <div className="app">
         <NavBar
           takeUsToHomePage={this.takeUsToHomePage}
           takeUsToFavoritesPage={this.takeUsToFavoritesPage}
           takeUsToLoginPage={this.takeUsToLoginPage}
+
         />
-        <Search 
-          handleSearch={this.handleSearch} 
+
+
+
+
+
+        <Search
+          handleSearch={this.handleSearch}
           updateLocation={this.updateLocation}
         />
         <Info
@@ -141,10 +177,24 @@ class App extends React.Component {
           onDoctorClick={this.onDoctorClick.bind(this)}
           latLong={this.state.latLong}
         />
+        <MuiThemeProvider>
+        <div className='login-button-navWrapper'>
+          <RaisedButton label="Login" primary={true}
+            style={style} onClick={(event) => this.toggleHidden(event)}/>
+        </div>
+          {!this.state.isHidden && <div className='login-wrapper'><Login className='login-modal'/></div>}
+        </MuiThemeProvider>
+
       </div>
     );
   }
 }
+
+
+
+
+
+
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
