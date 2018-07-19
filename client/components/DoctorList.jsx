@@ -17,7 +17,7 @@ var DoctorList = (props) => {
     return <DoctorListEntry doctor={doctor} key={doctor.uid} onClick={props.onClick}/>;
   });
   return(
-    <div className="dList">{DoctorListEntries}</div>
+    <div className="dList">{DoctorListEntries}<span className="spacer dleCard"></span></div>
   );
 };
 };
