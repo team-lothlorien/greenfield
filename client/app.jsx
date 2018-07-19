@@ -38,6 +38,7 @@ class App extends React.Component {
     this.getMapApi = this.getMapApi.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.saveDoctor = this.saveDoctor.bind(this);
+    this.saveQueries = this.saveQueries.bind(this);
   }
 
   toggleHidden () {
@@ -53,13 +54,15 @@ class App extends React.Component {
   checkSession() {
     axios.get('/authenticate')
     .then(resp => {
-      console.log('checksession:', resp.data.username);
-      if (resp.data) {
+      console.log('checksession:', resp.data);
+      if (resp.data.status) {
         this.setState({
-          loggedIn: true
+          loggedIn: true,
+          user: resp.data.user
         });
       }
-    });
+    })
+    .catch(err => console.log('bad response'));
   }
 
   swapFav () {
@@ -97,31 +100,14 @@ class App extends React.Component {
       }
     })
     .then( response => {
-<<<<<<< HEAD
-      this.setState({ latLong: [response.data[0], response.data[1]] })
-    })
-    .catch( err => console.log(err))
-=======
       this.setState({ latLong: [response.data[0], response.data[1]] });
     })
     .catch( err => console.log(err));
->>>>>>> dev
   }
-
 
   updateLocation(location) {
     this.getMapApi(location);
   }
-
-
-
-
-
-
-
-
-
-
 
   onDoctorClick(doctor) {
     if (this.state.loggedIn) {
@@ -134,6 +120,19 @@ class App extends React.Component {
   getDoctors() {
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   saveDoctor(doctor) {
     console.log(doctor);
@@ -151,38 +150,25 @@ class App extends React.Component {
 
   }
 
-<<<<<<< HEAD
+
   saveQueries(query) {
-    app.post('/queries', {
+    console.log('saveQueries fired');
+    axios.post('/queries', {
       user: this.state.user || null,
       query: query,
-      timeStamp: Data.now()
+      timeStamp: Date.now()
     })
-    .then()
+    .then(console.log('Queries SAVED!'));
+
   }
 
 
-
-
-
-
-
-
-
-
-
-
-=======
   createUser(username) {
     this.setState({
       user: username
-    }, () => [
-      console.log('CREATEUSER:', this.state.user)
-    ]);
+    });
   }
 
-
->>>>>>> dev
   render() {
     return (
       <div className="app">
@@ -218,5 +204,4 @@ class App extends React.Component {
 
 
 
-
-ReactDOM.render(<App />, document.getElementById('app'));
+  ReactDOM.render(<App />, document.getElementById('app'));

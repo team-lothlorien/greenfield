@@ -26,7 +26,13 @@ app.use(express.static(`${__dirname}/../client/`));
 
 //Authentication
 app.use(cookieParser());
-app.use(session({secret: 'secret!'}));
+app.use(session({
+  secret: 'secret!',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {maxAge: 6000000}
+}));
+
 
 // const passport = require('./auth/googleAuth.js');
 // app.use(passport.initialize());
@@ -106,21 +112,34 @@ app.post('/login', (req, response) => {
   .catch(err => console.log('ERROR CAUGHT:', err));
 });
 
-<<<<<<< HEAD
-app.post('/queries', (req, res) => {
 
+app.post('/queries', (req, res) => {
+  knex('Queries').insert({
+    usersUsername: req.body.user,
+    query: req.body.query,
+    timeStamp: req.body.timeStamp
+
+  })
+  .then(console.log('Query Saved! SNEAKY'))
+  .catch(console.log('Could not save query'));
 });
 
 
-=======
->>>>>>> dev
+
+
+
+
 app.post('/logout', (req, res) => {
   req.session.destroy();
 });
 
 
 app.get('/authenticate', (req, res) => {
-  res.send(req.session.username ? !!req.session.username : false);
+  // console.log('getSessiondata:', req.session, 'getSessionCookie:', req.session.username)
+  res.send({
+    status: req.session.username ? !!req.session.username : false,
+    user: req.session.username || null
+  });
 });
 
 let port = process.env.PORT || 3000;
