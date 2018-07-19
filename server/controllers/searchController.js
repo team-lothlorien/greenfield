@@ -11,7 +11,7 @@ module.exports = {
       return apiHelper.findDoctors(query, data[0], data[1])
     })
     .then(doctors => {
-      res.status(200).send(doctors);
+      return res.status(200).send(doctors);
     })
     .catch(err => console.error('Error fetching doctors: ', err))
   }
