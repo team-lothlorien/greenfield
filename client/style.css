@@ -1,15 +1,26 @@
+.app {
+  height: 0vh;
+}
+
 .dleCard {
   float: left;
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-left: 50px;
   width: 200px;
-  height: 200px
+  height: 200px;
+  border: thin solid black;
+  border-radius: 20px;
+  margin-top: 5px;
+  background-color: rgb(103, 139, 204)
 }
 
 .dCard {
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 1%;
+  margin-right: 55%;
   margin-top: 1%;
+  text-align: justify;
+  border: thin solid black
 }
 
 .dleImage {
@@ -35,6 +46,7 @@ h1 {
 }
 
 .dList {
+  padding-left: 50px;
   width: 50%;
   position: relative;
   z-index: -1;
@@ -80,9 +92,15 @@ label, label * {
 
 /* Main view */
 
+body {
+  margin: 0;
+  background: bisque;
+}
+
 .bodyWrapper {
   position: relative;
-  top: 232px;
+  height: 73.3vh;
+  top: 240px;
   z-index: -1;
 }
 
