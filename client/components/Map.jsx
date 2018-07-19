@@ -37,7 +37,6 @@ let findClosestDoctors = (doctors) => {
     changes = 0;
     for(let i = 0; i < array.length; i += 1) {
       if (i !== array.length - 1) {
-        //console.log('in sort:', array[i], array[i+1])
         if (array[i].distance > array[i+1].distance) {
           changes++;
           let temp = array[i+1];
@@ -51,8 +50,6 @@ let findClosestDoctors = (doctors) => {
     }
   };
   sort(flatArr);
-
- let only10 = flatArr.slice(0, 10);
 
   return flatArr;
 }
@@ -98,11 +95,6 @@ class MapContainer extends React.Component {
 
           defaultZoom={defaultProps.zoom}
         >
-        <UserMarker
-          key={this.props.latLong[0]}
-          lat={this.props.latLong[0]}
-          lat={this.props.latLong[1]}
-        />
         {
           matchedDocs.length !== undefined
             ? matchedDocs.map( doc => {
