@@ -1,11 +1,23 @@
-let CommentList = (props) => {
+import React from 'react';
 
-  var DoctorListEntries = props.doctors.map((doctor) => {
-    return <DoctorListEntry doctor={doctor} key={doctor.uid} onDoctorClick={props.onDoctorClick}/>;
-  });
-  return(
-    <div className="dList">{DoctorListEntries}<span className="spacer dleCard"></span></div>
-  );
+let CommentList = (props) => {
+  return (
+    <div className="comment-list">
+      {/* {props.comments.forEach(commentObj => {
+        return ( */}
+          <div className="comment-entry">
+            {/* <h4>{props.commentObj.username}</h4> */}
+            {/* <h5>{props.commentObj.date}</h5> */}
+            {/* <div className="message">{commentObj.comment}</div> */}
+            <h4>Peter</h4>
+            <h5>January 5, 2018</h5>
+            <div>He was a good doctor</div>
+          </div>
+        )
+      {/* }) */}
+      }
+    </div>
+  )
 };
 
 

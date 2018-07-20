@@ -1,5 +1,8 @@
 import React from 'react';
+import CommentBox from './CommentBox.jsx';
+
 var Doctor = (props) => {
+  console.log('props in Doctor.jsx:', props);
   return(
     <div className="dCard">
       <div className="dIntro">
@@ -10,6 +13,12 @@ var Doctor = (props) => {
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
         <p className="dBio">Bio: {props.doctor.profile.bio}</p>
         <span className="spacer dleCard"></span>
+      </div>
+      <div className="comment-box">
+        <CommentBox 
+          doctor={props.doctor}
+          username={props.username}
+        />
       </div>
     </div>
   )

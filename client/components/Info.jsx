@@ -31,6 +31,7 @@ var Info = (props) => {
             className="map"
             latLong={props.latLong}
             doctors={props.doctors}
+            username={props.username}
           />
           </div>
         </div>

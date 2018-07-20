@@ -1,5 +1,4 @@
 import React from 'react';
-import CommentBox from './CommentBox.jsx';
 
 var DoctorListEntry = (props) => {
   return(
@@ -11,7 +10,7 @@ var DoctorListEntry = (props) => {
       <div className="dleSummary">
       <img className="rating" src={props.doctor.ratings !== undefined && props.doctor.ratings[0] !==undefined?  props.doctor.ratings[0].image_url_small : `https://asset2.betterdoctor.com/assets/consumer/stars/stars-small-3.0.png`}/>
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
-        <ul>Specialties: {props.doctor.specialties.map(el => {return <li key={el}>{el.name}</li>})}</ul>
+        <ul>Specialties: {props.doctor.specialties.map((el, i) => {return <li key={i}>{el.name}</li>})}</ul>
       </div>
     </div>
   );
