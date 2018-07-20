@@ -2,7 +2,6 @@ import React from 'react';
 import CommentBox from './CommentBox.jsx';
 
 var Doctor = (props) => {
-  console.log('props in Doctor.jsx:', props);
   return(
     <div className="dCard">
       <button className="back" onClick={() => props.back()}>Back to results...</button>

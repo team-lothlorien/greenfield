@@ -112,7 +112,6 @@ class App extends React.Component {
   }
 
   favorite(doctor){
-    console.log('fav');
     axios.post('/favorites', {
       username: this.state.user,
       doctorNPI: doctor.npi,
@@ -178,21 +177,23 @@ class App extends React.Component {
   deleteDoctor() {
 
   }
-  
+
   saveQueries(query) {
     axios.post('/queries', {
       user: this.state.user || null,
       query: query,
       timeStamp: Date.now()
     })
-    .then(console.log('Queries SAVED!'));
+    //.then(console.log('Queries SAVED!'));
 
   }
 
   createUser(username) {
     this.setState({
-      user: username
+      user: username,
+      loggedIn: true
     });
+    this.toggleHidden();
   }
   clickSignup() {
     this.setState({
@@ -203,8 +204,8 @@ class App extends React.Component {
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
-
-    if (this.state.loggedIn !== true) {
+    if(true === true){
+    //if (this.state.loggedIn === true) {
         renderMe = <Info
         doctors={this.state.doctors}
         getMapApi={this.getMapApi}
@@ -237,7 +238,7 @@ class App extends React.Component {
           updateLocation={this.updateLocation}
           saveQueries={this.saveQueries}
         />
-        
+
         {this.state.loading && <Loading type="Balls" color="#fff" />}
 
         {renderMe}

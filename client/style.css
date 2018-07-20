@@ -69,7 +69,8 @@
   margin-right: 55%;
   margin-top: 1%;
   text-align: justify;
-  border: thin solid black
+  border: thin solid black;
+  background: white
 }
 
 .dleImage {
@@ -140,7 +141,7 @@ ul {
   position: fixed;
   top: 50%;
   color: black;
-  margin-left: 50%;
+  margin-left: 40%;
 }
 
 /* search start */
@@ -167,7 +168,7 @@ label, label * {
 
 body {
   margin: 0;
-  background: #f4f4f4;
+  background-image: url("http://www.webdesigndev.com/wp-content/uploads/2015/02/Free-Minimalist-Subtle-Patterns-for-Clean-Websites1.jpg");
 }
 
 .bodyWrapper {

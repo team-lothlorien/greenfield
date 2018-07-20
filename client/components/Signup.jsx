@@ -33,7 +33,7 @@ class Signup extends React.Component {
     });
   }
   handleSubmit(event) {
-    console.log('ZIPCODEZIPCODE:', this.state.zipcode);
+    //console.log('ZIPCODEZIPCODE:', this.state.zipcode);
 
     axios.post('/signup', {
 
@@ -47,12 +47,12 @@ class Signup extends React.Component {
       email: this.state.email
     })
     .then(resp => {
-      this.props.createUser(this.state.username);
-      console.log('RESPONSE:', resp);
+      //console.log('RESPONSE:', resp);
     })
     .catch(err => {
-      console.log('ERROR:', err);
+      //console.log('ERROR:', err);
     });
+    this.props.createUser(this.state.username);
     event.preventDefault();
   }
 
