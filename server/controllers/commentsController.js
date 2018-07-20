@@ -26,7 +26,7 @@ module.exports = {
   delete: (req, res) => {
     commentsModel.deleteComments(req.body.username, req.body.doctorId)
     .then(deletion => {
-      console.log(`Number of deletions ${deletion}`);
+      console.log(`${deletion} comment deleted from databse`);
       res.sendStatus(200)
     })
     .catch(err => console.error('Error deleting comment: ', err))

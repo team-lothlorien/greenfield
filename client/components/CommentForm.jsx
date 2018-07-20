@@ -2,45 +2,53 @@ import React from 'react';
 
 class CommentForm extends React.Component {
   state = {
-    comment: ''
+    input: ''
   }
   handleTextChange = (e) => {
     e.preventDefault();
     this.setState({
-      text: e.target.value
+      input: e.target.value
     })
   }
-  handleSubmit = (e) => {
+  handleClick = (e) => {
     e.preventDefault();
-    let username = props.username;
-    let comment = this.state.comment;
-    if(!text || !username) {
+    // console.log('e from handleclick in comment form', e)
+    let username = this.props.username;
+    // console.log('username in commentform handleclick', username)
+    let input = this.state.input;
+    if(!input || !username) {
       return
     }
-    this.props.onCommentSubmit({
+    this.props.handleCommentSubmit({
       username: username,
-      comment: text
+      comment: input
     })
     this.setState({
-      text: comment
+      input: ''
     })
   }
-  render = () => (
-    <form className="commentForm" onSubmit={this.handleSubmit}>
+  render = () => {
+    if (this.props.loggedIn)
+    return (
+    <form className="commentForm" onSubmit={(e) => {this.handleClick(e)}}>
       <div>{this.props.username}</div>
-      <input 
+      <textarea
         type="text"
         placeholder="Leave a comment..."
         value={this.state.comment}
-        onChange={this.handleTextChange}
-      />
+        onChange={this.handleTextChange}>
+      </textarea>
       <input 
         type="submit"
         value="Post"
       />
     </form>
-
   )
+else{
+  return (
+    <div>Please Log In to Leave a Review!</div>
+  )
+}}
 };
 
 

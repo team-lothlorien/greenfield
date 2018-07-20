@@ -2,6 +2,19 @@
   height: 10000px;
 } */
 
+* {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.login-wrapper, .signup {
+  position: fixed;
+    top: 11.5%;
+    z-index: 2;
+    left: 79.5%;
+    background: mintcream;
+    border: thin solid white;
+}
+
 .app {
   height: 0vh;
 }
@@ -17,6 +30,20 @@
   border-radius: 5px;
   margin-top: 5px;
   background-color: white
+}
+
+.dleCard:hover {
+  background: lightgrey;
+}
+
+.loading {
+  fill: black;
+  height: 667px;
+  width: 375px;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  z-index: -1
 }
 
 .spacer {
@@ -56,7 +83,8 @@ img {
 
 h1 {
   color: white;
-  font-family: 'Pacifico', cursive;
+  font-family: "Bradley Hand", cursive !important;
+  text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
   font-size: 4vw;
 }
 
@@ -99,6 +127,7 @@ ul {
   display: flex;
   height: 160px;
   justify-content: space-evenly;
+  z-index: 1
 }
 
 .favorites, .login {
@@ -158,7 +187,11 @@ h1 {
   /* background-image: url("https://i.imgflip.com/11n39t.jpg"); */
   background-repeat: no-repeat;
   height: 500px;
-  width: auto;
+  width: 100%;
+  color: black;
+  position: fixed;
+  top: 45%;
+  left: 10%
 }
 
 .react-autosuggest__container {

@@ -47,6 +47,7 @@ class Signup extends React.Component {
       email: this.state.email
     })
     .then(resp => {
+      this.props.createUser(this.state.username);
       console.log('RESPONSE:', resp);
     })
     .catch(err => {
