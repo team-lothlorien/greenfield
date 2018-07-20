@@ -177,7 +177,7 @@ class App extends React.Component {
   deleteDoctor() {
 
   }
-  
+
   saveQueries(query) {
     axios.post('/queries', {
       user: this.state.user || null,
@@ -190,7 +190,8 @@ class App extends React.Component {
 
   createUser(username) {
     this.setState({
-      user: username
+      user: username,
+      loggedIn: true
     });
     this.toggleHidden();
   }
@@ -204,7 +205,7 @@ class App extends React.Component {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
 
-    if (this.state.loggedIn !== true) {
+    if (this.state.loggedIn === true) {
         renderMe = <Info
         doctors={this.state.doctors}
         getMapApi={this.getMapApi}
@@ -237,7 +238,7 @@ class App extends React.Component {
           updateLocation={this.updateLocation}
           saveQueries={this.saveQueries}
         />
-        
+
         {this.state.loading && <Loading type="Balls" color="#fff" />}
 
         {renderMe}
