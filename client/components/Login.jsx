@@ -26,14 +26,11 @@ class Login extends React.Component {
     });
   }
   handleSubmit(event) {
-    console.log('username:', this.state.username);
-    console.log('password:', this.state.password);
     axios.post('/login', {
       username: this.state.username,
       password: this.state.password
     })
     .then(resp => {
-      console.log('RESPONSE:', resp);
 
       if (resp.data.status === 'badUser') {
         this.setState({

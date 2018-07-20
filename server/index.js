@@ -58,7 +58,10 @@ app.post('/signup', (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let zipCode = req.body.zipCode;
+  let age = req.body.age;
+  let gender = req.body.gender;
   let email = req.body.email;
+  console.log(username, password, firstName, lastName, zipCode, age, gender, email);
   bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, null, (err, hash) => {
       knex('Users').insert({
@@ -67,10 +70,12 @@ app.post('/signup', (req, res) => {
         firstName: firstName,
         lastName: lastName,
         zipCode: zipCode,
+        gender: gender,
+        age: age,
         email: email
       })
       .then(resp => {
-        console.log(`${username} added to db`);
+        //console.log(`${username} added to db`);
         req.session.regenerate(() => {
           req.session.username = username;
         });
@@ -96,16 +101,16 @@ app.post('/login', (req, response) => {
             req.session.username = username;
             response.status(201);
             response.send(req.session);
-            console.log('Password Matched! redirecting....');
+            //console.log('Password Matched! redirecting....');
           });
         } else {
           response.status(401);
           response.send({status: 'badPassword'});
-          console.log('password did not match');
+          //console.log('password did not match');
         }
       });
     } else {
-      console.log('Username not in database');
+      //console.log('Username not in database');
       response.send({status: 'badUser'});
     }
   })
@@ -120,7 +125,7 @@ app.post('/queries', (req, res) => {
     timeStamp: req.body.timeStamp
 
   })
-  .then(console.log('Query Saved! SNEAKY'))
+  //.then(console.log('Query Saved! SNEAKY'))
   .catch();
 });
 
