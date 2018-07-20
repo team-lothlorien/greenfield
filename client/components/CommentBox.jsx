@@ -51,7 +51,7 @@ class CommentBox extends React.Component{
     this.setState({comments: newComments});
     axios.post('/comments', { 
       doctorId: this.props.doctor.npi,
-      username: this.state.username,
+      username: comment.username,
       comment: comment.comment
     })
     .then(res => console.log('CommentBox/handleCommentSubmit getting results back from post', res))
