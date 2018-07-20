@@ -5,7 +5,9 @@ import MapContainer from './Map.jsx';
 
 import Doctor from './Doctor.jsx';
 var Info = (props) => {
-
+    if(props.doctors === ""){
+      return (<h1 id="land">NO RESULTS FOUND</h1>);
+    }
     if (props.doctors.length > 1) {
       return (
         <div className="bodyWrapper">
@@ -25,7 +27,7 @@ var Info = (props) => {
     } else if (props.doctors.length === 1) {
       return (
         <div className="bodyWrapper">
-          <Doctor doctor={props.doctors[0]} />
+          <Doctor doctor={props.doctors[0]} back={props.back} favorite={props.favorite}/>
           <div className="map"><MapContainer
             location={props.location}
             className="map"
@@ -39,7 +41,7 @@ var Info = (props) => {
     } else {
       return (
         <div className="bodyWrapper">
-          <div id="land">Landing view</div>
+          <h1 id="land">FIND A DOC BEFORE YOU FIND A GRAVE</h1>
           </div>
         )
     }

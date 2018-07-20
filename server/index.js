@@ -121,7 +121,7 @@ app.post('/queries', (req, res) => {
 
   })
   .then(console.log('Query Saved! SNEAKY'))
-  .catch(console.log('Could not save query'));
+  .catch();
 });
 
 
