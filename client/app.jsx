@@ -23,6 +23,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showFav: false,
       user: 'Guest',
       doctors: [],
       storedDocs: [],
@@ -81,6 +82,9 @@ class App extends React.Component {
   }
 
   swapFav () {
+    this.setState({
+      showFav: !this.state.showFav
+    });
   }
 
   takeUsToHomePage (event) {
@@ -174,7 +178,7 @@ class App extends React.Component {
   deleteDoctor() {
 
   }
-
+  
   saveQueries(query) {
     axios.post('/queries', {
       user: this.state.user || null,
@@ -233,7 +237,7 @@ class App extends React.Component {
           updateLocation={this.updateLocation}
           saveQueries={this.saveQueries}
         />
-        {/* <Signup/> */}
+        
         {this.state.loading && <Loading type="Balls" color="#fff" />}
 
         {renderMe}
