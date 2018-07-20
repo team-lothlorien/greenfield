@@ -1,10 +1,12 @@
 import React from 'react';
 
 let CommentList = (props) => {
+  if(props.loggedIn)
   // if(props.username !== null || username !== '' || username !== 'Guest') {
   return (
     <ul className="comment-list">
-      {props.comments.forEach(commentObj => {
+    {/* {console.log('commentListprops:', props.comments)} */}
+      {props.comments.map(commentObj => {
         return (
           <li className="comment-entry">
             <h4>{commentObj.username}</h4>
@@ -17,9 +19,10 @@ let CommentList = (props) => {
       })}
     </ul>
   )
-// } else {
-//     return (<div>Sign in to see user reviews</div>)
-//   }
+  
+else {
+    return (<div>Sign in to see user reviews</div>)
+  }
 };
 
 
