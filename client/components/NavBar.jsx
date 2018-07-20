@@ -31,7 +31,8 @@ var NavBar = (props) => {
             </span>
 
             </div>
-            {!props.isHidden && <div className='login-wrapper'><Login clickSignup={props.clickSignup} createUser={props.createUser}className='login-modal'/></div>}
+            {props.renderSignup && <div className="signup"><Signup createUser={props.createUser}/></div>}
+            {!props.renderSignup && !props.isHidden && <div className='login-wrapper'><Login clickSignup={props.clickSignup} createUser={props.createUser}className='login-modal'/></div>}
           </MuiThemeProvider>
 
     </div>

@@ -25,6 +25,7 @@ class App extends React.Component {
     this.state = {
       user: 'Guest',
       doctors: [],
+      storedDocs: [],
       compare: [],
       location: '',
       latLong: '',
@@ -47,11 +48,18 @@ class App extends React.Component {
     this.saveQueries = this.saveQueries.bind(this);
     this.toggleHidden = this.toggleHidden.bind(this);
     this.clickSignup = this.clickSignup.bind(this);
+    this.back = this.back.bind(this);
+    this.favorite = this.favorite.bind(this);
+  }
+
+  back(){
+    this.setState({doctors: this.state.storedDocs});
   }
 
   toggleHidden () {
     this.setState({
-      isHidden: !this.state.isHidden
+      isHidden: !this.state.isHidden,
+      renderSignup: false
     });
   }
 
@@ -62,7 +70,6 @@ class App extends React.Component {
   checkSession() {
     axios.get('/authenticate')
     .then(resp => {
-      console.log('checksession:', resp.data);
       if (resp.data.status) {
         this.setState({
           loggedIn: true,
@@ -78,16 +85,37 @@ class App extends React.Component {
 
   takeUsToHomePage (event) {
     event.preventDefault();
+    this.setState({doctors: [], loading: false});
     // do something to change info section
   }
   takeUsToFavoritesPage (event) {
     event.preventDefault();
+    axios.get('/favorites', {
+      params: {
+        username: this.state.user
+      }
+    })
+    .then(favDocs => this.setState({
+      doctors: favDocs.data.map((el) => {
+        return JSON.parse(el.doctorData)
+      })
+    }));
     // do something to change info section
   }
   takeUsToLoginPage (event) {
     event.preventDefault();
     // do something to change info section
   }
+
+  favorite(doctor){
+    console.log('fav');
+    axios.post('/favorites', {
+      username: this.state.user,
+      doctorNPI: doctor.npi,
+      doctorData: doctor
+    });
+  }
+
   handleSearch(term, location) {
     this.setState({
       loading: true
@@ -121,11 +149,11 @@ class App extends React.Component {
   }
 
   onDoctorClick(doctor) {
-    if (this.state.loggedIn) {
-      this.saveDoctor(doctor);
-    } else {
-      this.setState({doctors: [doctor]});
-    }
+    // if (this.state.loggedIn) {
+    //   this.saveDoctor(doctor);
+    // } else {
+      this.setState({doctors: [doctor], storedDocs: this.state.doctors});
+    //}
   }
 
   getDoctors() {
@@ -133,7 +161,6 @@ class App extends React.Component {
   }
 
   saveDoctor(doctor) {
-    console.log(doctor);
     // axios.post('/favorites', {
     //   params: {
     //     username: doctor,
@@ -149,7 +176,6 @@ class App extends React.Component {
   }
 
   saveQueries(query) {
-    console.log('saveQueries fired');
     axios.post('/queries', {
       user: this.state.user || null,
       query: query,
@@ -165,17 +191,17 @@ class App extends React.Component {
     });
   }
   clickSignup() {
-    console.log('signupClick');
     this.setState({
-      renderSignup: !this.state.renderSignup
+      renderSignup: !this.state.renderSignup,
     });
   }
 
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
+
     if (this.state.loggedIn !== true) {
-      renderMe = <Info
+        renderMe = <Info
         doctors={this.state.doctors}
         getMapApi={this.getMapApi}
         location={this.state.location}
@@ -183,9 +209,11 @@ class App extends React.Component {
         latLong={this.state.latLong}
         loggedIn={this.state.loggedIn}
         username={this.state.user}
-      />;
+        back={this.back}
+        favorite={this.favorite}
+        />;
     } else {
-      renderMe = <h1 className="GRAVE">FIND A GRAVE SHMUCK</h1>;
+      renderMe = <h1 className="GRAVE">LOG IN FIRST</h1>;
     }
     return (
       <div className="app">
@@ -197,6 +225,7 @@ class App extends React.Component {
           isHidden={this.state.isHidden}
           createUser={this.createUser}
           clickSignup={this.clickSignup}
+          renderSignup={this.state.renderSignup}
 
         />
         <Search

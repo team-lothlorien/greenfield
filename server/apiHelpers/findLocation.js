@@ -13,8 +13,8 @@ let formatLocationData = (searchValue) => {
   let formatString = '';
 
   for (let i = 0; i < formatArr.length; i += 1) {
-    if (i !== 0) { formatString += ','; } 
-    
+    if (i !== 0) { formatString += ','; }
+
     for (let j = 0; j < formatArr[i].length; j += 1) {
       if (formatArr[i][j] !== "") {
         formatString += `+${formatArr[i][j]}`;
@@ -40,5 +40,5 @@ module.exports.findLocation = function (locationQuery) {
       return [lat, long];
     }
   })
-  .catch( err => console.log(err) )
+  .catch(() => {return null})
 }
