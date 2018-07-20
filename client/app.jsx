@@ -132,19 +132,6 @@ class App extends React.Component {
 
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   saveDoctor(doctor) {
     console.log(doctor);
     // axios.post('/favorites', {
@@ -161,7 +148,6 @@ class App extends React.Component {
 
   }
 
-
   saveQueries(query) {
     console.log('saveQueries fired');
     axios.post('/queries', {
@@ -172,7 +158,6 @@ class App extends React.Component {
     .then(console.log('Queries SAVED!'));
 
   }
-
 
   createUser(username) {
     this.setState({
@@ -196,6 +181,7 @@ class App extends React.Component {
         location={this.state.location}
         onDoctorClick={this.onDoctorClick.bind(this)}
         latLong={this.state.latLong}
+        loggedIn={this.state.loggedIn}
         username={this.state.user}
       />;
     } else {
@@ -218,6 +204,7 @@ class App extends React.Component {
           updateLocation={this.updateLocation}
           saveQueries={this.saveQueries}
         />
+        {/* <Signup/> */}
         {this.state.loading && <Loading type="Balls" color="#fff" />}
 
         {renderMe}

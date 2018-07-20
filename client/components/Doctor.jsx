@@ -17,6 +17,7 @@ var Doctor = (props) => {
       <div className="comment-box">
         <CommentBox 
           doctor={props.doctor}
+          loggedIn={props.loggedIn}
           username={props.username}
         />
       </div>
