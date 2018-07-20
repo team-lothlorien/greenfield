@@ -69,6 +69,7 @@ class CommentBox extends React.Component{
         username={this.state.username}
         comments={this.state.comments}
         deleteComment={this.deleteComment}
+        getComments={this.getComments}
       />
     </div>
   )}
