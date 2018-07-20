@@ -42,7 +42,7 @@ var Info = (props) => {
     } else {
       return (
         <div className="bodyWrapper">
-          <h1 id="land">FIND A DOC BEFORE YOU FIND A GRAVE</h1>
+          <img id='land' src='http://www.webdesigndev.com/wp-content/uploads/2015/02/Free-Minimalist-Subtle-Patterns-for-Clean-Websites1.jpg'/>
           </div>
         )
     }
