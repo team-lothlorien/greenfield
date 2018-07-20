@@ -58,7 +58,10 @@ app.post('/signup', (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let zipCode = req.body.zipCode;
+  let age = req.body.age;
+  let gender = req.body.gender;
   let email = req.body.email;
+  console.log(username, password, firstName, lastName, zipCode, age, gender, email);
   bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, null, (err, hash) => {
       knex('Users').insert({
@@ -67,6 +70,8 @@ app.post('/signup', (req, res) => {
         firstName: firstName,
         lastName: lastName,
         zipCode: zipCode,
+        gender: gender,
+        age: age,
         email: email
       })
       .then(resp => {
