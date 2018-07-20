@@ -13,7 +13,6 @@ var DoctorListEntry = (props) => {
         <span>Distance: {Number(props.doctor.practices[0].distance).toFixed(1)}mi</span>
         <ul>Specialties: {props.doctor.specialties.map(el => {return <li key={el}>{el.name}</li>})}</ul>
       </div>
-      <CommentBox />
     </div>
   );
 };
