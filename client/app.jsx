@@ -6,10 +6,12 @@ import Search from './components/Search.jsx';
 import Info from './components/Info.jsx';
 import Signup from './components/Signup.jsx';
 import Login from './components/Login.jsx';
+import Loading from './components/Loading.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+
 
 const style = {
   margin: 15,
@@ -21,14 +23,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
+      user: 'Guest',
       doctors: [],
       compare: [],
       location: '',
       latLong: '',
       loggedIn: false,
       isHidden: true,
-      renderSignup: false
+      renderSignup: false,
+      loading: false
     };
 
 
@@ -86,6 +89,9 @@ class App extends React.Component {
     // do something to change info section
   }
   handleSearch(term, location) {
+    this.setState({
+      loading: true
+    });
     axios.get('/search', {
       params: {
         term: term,
@@ -93,7 +99,7 @@ class App extends React.Component {
       }
     })
     .then( response => {
-      this.setState({doctors: response.data});
+      this.setState({doctors: response.data, loading: false});
     })
     .catch( err => console.log(err));
   }
@@ -199,6 +205,8 @@ class App extends React.Component {
           saveQueries={this.saveQueries}
         />
         {/* <Signup/> */}
+        {this.state.loading && <Loading type="Balls" color="#fff" />}
+
         {renderMe}
       </div>
     );
