@@ -1,26 +1,27 @@
 import React from 'react';
 
 let CommentList = (props) => {
-  if(props.loggedIn)
-  // if(props.username !== null || username !== '' || username !== 'Guest') {
-  return (
-    <ul className="comment-list">
-    {/* {console.log('commentListprops:', props.comments)} */}
-      {props.comments.map(commentObj => {
-        return (
-          <li className="comment-entry">
-            <h4>{commentObj.username}</h4>
-            <h5>{commentObj.date}</h5>
-            <div className="message">{commentObj.comment}</div>
-            {/* If currUser = username, conditional render of delete comment */}
-            <button onClick={() => {this.props.deleteComment()}}>Delete</button>
-          </li>
-        )
-      })}
-    </ul>
-  )
   
-else {
+  if (props.loggedIn || props.username !== null || props.username !== 'Guest' || props.username !== '') {
+    // if(props.username !== null || username !== '' || username !== 'Guest') {
+    return (
+      <ul className="comment-list">
+        {/* {console.log('commentListprops:', props.comments)} */}
+        {props.comments.map(commentObj => {
+          return (
+            <li className="comment-entry">
+              <h4>{commentObj.username}</h4>
+              <h5>{commentObj.date}</h5>
+              <div className="message">{commentObj.comment}</div>
+              {/* If currUser = username, conditional render of delete comment */}
+              <button onClick={() => { this.props.deleteComment() }}>Delete</button>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+  else {
     return (<div>Sign in to see user reviews</div>)
   }
 };
