@@ -16,7 +16,11 @@ var Doctor = (props) => {
         <p className="dBio">Bio: {props.doctor.profile.bio}</p>
       </div>
       <div className="comment-box">
-
+        <CommentBox
+          doctor={props.doctor}
+          loggedIn={props.loggedIn}
+          username={props.username}
+        />
       </div>
       <span className="spacer dleCard"></span>
     </div>
