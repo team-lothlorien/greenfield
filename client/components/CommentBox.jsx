@@ -8,7 +8,7 @@ class CommentBox extends React.Component{
     input: '',
     comments: [{doctorId: 132624799, username: 'peter', comment:'hello', date: 'January 24, 2018'}]
   }
-  
+
   componentDidMount = () => {
     this.getComments();
   }
@@ -21,13 +21,13 @@ class CommentBox extends React.Component{
 
   getComments = () => {
     // console.log('props doctor ', this.props.doctor);
-    axios.get('/comments', { 
+    axios.get('/comments', {
       params: {
         doctorId: this.props.doctor.npi
       }
     })
     .then(res => {
-      console.log('CommentBox/getComments getting results back from get', res);
+      //console.log('CommentBox/getComments getting results back from get', res);
       this.setState({
         comments : res.data
       })
@@ -40,26 +40,26 @@ class CommentBox extends React.Component{
       username: username,
       doctorId: doctorId
     })
-    .then(res => console.log('Deleting comment', res))
+    //.then(res => console.log('Deleting comment', res))
   }
   handleCommentSubmit = (comment) => {
-    console.log('comment in handlecommentSubmit in commentbox:', comment)
+    //console.log('comment in handlecommentSubmit in commentbox:', comment)
     let comments = this.state.comments;
-    console.log('comments in commenbox handlecommentSubmit:', comments)
+    //console.log('comments in commenbox handlecommentSubmit:', comments)
     let newComments = comments.concat([comment]);
-    console.log('newComments in comentbox:', newComments);
+    //console.log('newComments in comentbox:', newComments);
     this.setState({comments: newComments});
-    axios.post('/comments', { 
+    axios.post('/comments', {
       doctorId: this.props.doctor.npi,
       username: comment.username,
       comment: comment.comment
     })
-    .then(res => console.log('CommentBox/handleCommentSubmit getting results back from post', res))
+    //.then(res => console.log('CommentBox/handleCommentSubmit getting results back from post', res))
   }
   render() {
     return(
     <div className="CommentBoxCard">
-      <CommentForm 
+      <CommentForm
         handleCommentSubmit={this.handleCommentSubmit}
         loggedIn={this.props.loggedIn}
         username={this.props.loggedIn? this.state.username : 'Guest'}

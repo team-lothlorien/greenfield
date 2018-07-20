@@ -108,7 +108,6 @@ class App extends React.Component {
   }
 
   favorite(doctor){
-    console.log('fav');
     axios.post('/favorites', {
       username: this.state.user,
       doctorNPI: doctor.npi,
@@ -181,7 +180,7 @@ class App extends React.Component {
       query: query,
       timeStamp: Date.now()
     })
-    .then(console.log('Queries SAVED!'));
+    //.then(console.log('Queries SAVED!'));
 
   }
 
@@ -189,6 +188,7 @@ class App extends React.Component {
     this.setState({
       user: username
     });
+    this.toggleHidden();
   }
   clickSignup() {
     this.setState({
