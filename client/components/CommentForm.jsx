@@ -12,9 +12,9 @@ class CommentForm extends React.Component {
   }
   handleClick = (e) => {
     e.preventDefault();
-    console.log('e from handleclick in comment form', e)
+    // console.log('e from handleclick in comment form', e)
     let username = this.props.username;
-    console.log('username in commentform handleclick', username)
+    // console.log('username in commentform handleclick', username)
     let input = this.state.input;
     if(!input || !username) {
       return
@@ -27,7 +27,9 @@ class CommentForm extends React.Component {
       input: ''
     })
   }
-  render = () => (
+  render = () => {
+    if (this.props.loggedIn)
+    return (
     <form className="commentForm" onSubmit={(e) => {this.handleClick(e)}}>
       <div>{this.props.username}</div>
       <textarea
@@ -42,6 +44,11 @@ class CommentForm extends React.Component {
       />
     </form>
   )
+else{
+  return (
+    <div>Please Log In to Leave a Review!</div>
+  )
+}}
 };
 
 
