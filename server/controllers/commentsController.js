@@ -5,7 +5,10 @@ module.exports = {
   get: (req, res) => {
     commentsModel.getComments(req.query.doctorId)
     .then(comments => res.status(200).send(comments))
-    .catch(err => console.error('Error fetching comments: ', err))
+    .catch(err => {
+      res.status(400)
+      .send(console.error('Error fetching comments: ', err))
+    })
   },
   post: (req, res) => {
     commentsModel.saveComments(req.body.doctorId, req.body.username, req.body.comment)

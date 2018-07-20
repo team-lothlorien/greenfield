@@ -190,6 +190,7 @@ class App extends React.Component {
         location={this.state.location}
         onDoctorClick={this.onDoctorClick.bind(this)}
         latLong={this.state.latLong}
+        username={this.state.user}
       />;
     } else {
       renderMe = <h1 className="GRAVE">FIND A GRAVE SHMUCK</h1>;
