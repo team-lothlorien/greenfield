@@ -42,7 +42,7 @@ var Info = (props) => {
     } else {
       return (
         <div className="bodyWrapper">
-          <h1 id="land">FIND A DOC BEFORE YOU FIND A GRAVE</h1>
+          <h1 id="land">BETTER DOCTORS. BETTER CARE.</h1>
           </div>
         )
     }

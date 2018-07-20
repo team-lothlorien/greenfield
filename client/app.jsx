@@ -204,8 +204,8 @@ class App extends React.Component {
   render() {
     // const compClass = this.state.isHovered ? style.visibility = 'visible' : style.visibility = 'hidden';
     var renderMe;
-
-    if (this.state.loggedIn === true) {
+    if(true === true){
+    //if (this.state.loggedIn === true) {
         renderMe = <Info
         doctors={this.state.doctors}
         getMapApi={this.getMapApi}
