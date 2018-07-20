@@ -62,7 +62,7 @@ class CommentBox extends React.Component{
       <CommentForm
         handleCommentSubmit={this.handleCommentSubmit}
         loggedIn={this.props.loggedIn}
-        username={this.props.loggedIn? this.state.username : 'Guest'}
+        username={this.props.username}
         doctorNPI={this.props.doctor.npi}
       />
       <CommentList

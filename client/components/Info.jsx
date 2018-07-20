@@ -27,7 +27,7 @@ var Info = (props) => {
     } else if (props.doctors.length === 1) {
       return (
         <div className="bodyWrapper">
-          <Doctor doctor={props.doctors[0]} back={props.back} favorite={props.favorite}/>
+          <Doctor doctor={props.doctors[0]} back={props.back} favorite={props.favorite} username={props.username}/>
           <div className="map"><MapContainer
             location={props.location}
             className="map"
