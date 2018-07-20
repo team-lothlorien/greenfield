@@ -5,4 +5,5 @@ server/config.js
 client/dist/bundle.js
 .eslintrc.js
 db/sqlite3.exe
+db/whatsupdoc.sqlite
 package-lock.json
