@@ -51,9 +51,11 @@ app.use('/location', locationRouter);
 
 
 //Authentication
-//data is coming from 
+
 app.post('/signup', (req, res) => {
+  //salt rounds for bcrypt
   let saltRounds = 10;
+  //data coming from signup input fields
   let username = req.body.username;
   let password = req.body.password;
   let firstName = req.body.firstName;
@@ -62,7 +64,7 @@ app.post('/signup', (req, res) => {
   let age = req.body.age;
   let gender = req.body.gender;
   let email = req.body.email;
-  console.log(username, password, firstName, lastName, zipCode, age, gender, email);
+  //bcrypt
   bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, null, (err, hash) => {
       knex('Users').insert({
@@ -76,8 +78,10 @@ app.post('/signup', (req, res) => {
         email: email
       })
       .then(resp => {
-        //console.log(`${username} added to db`);
+        //express session begins after signup
         req.session.regenerate(() => {
+          //we added a username property to attach to session to
+          //pass to app.jsx
           req.session.username = username;
         });
       })
@@ -89,6 +93,7 @@ app.post('/signup', (req, res) => {
 
 
 app.post('/login', (req, response) => {
+  //data comes from login component
   let username = req.body.username;
   let password = req.body.password;
   knex('Users').where({username: username})
@@ -96,22 +101,25 @@ app.post('/login', (req, response) => {
   .then(resp => {
     if (resp[0]) {
       bcrypt.compare(password, resp[0].password, (err, res) => {
+        //if res is truthy
         if (res) {
+          //set session.username to username provided from login
           req.session.username = username;
+          //regenerate session
           req.session.regenerate(() => {
             req.session.username = username;
             response.status(201);
             response.send(req.session);
-            //console.log('Password Matched! redirecting....');
+
           });
         } else {
           response.status(401);
           response.send({status: 'badPassword'});
-          //console.log('password did not match');
+
         }
       });
     } else {
-      //console.log('Username not in database');
+
       response.send({status: 'badUser'});
     }
   })
@@ -120,13 +128,14 @@ app.post('/login', (req, response) => {
 
 
 app.post('/queries', (req, res) => {
+  //save user search queries to db
   knex('Queries').insert({
     usersUsername: req.body.user,
     query: req.body.query,
     timeStamp: req.body.timeStamp
 
   })
-  //.then(console.log('Query Saved! SNEAKY'))
+
   .catch();
 });
 
@@ -136,17 +145,22 @@ app.post('/queries', (req, res) => {
 
 
 app.post('/logout', (req, res) => {
+  //destroy session
   req.session.destroy();
 });
 
 
 app.get('/authenticate', (req, res) => {
-  // console.log('getSessiondata:', req.session, 'getSessionCookie:', req.session.username)
+  //auth check
+
   res.send({
+    //send back to app.jsx an object with status
+    //and username keys
     status: req.session.username ? !!req.session.username : false,
     user: req.session.username || null
   });
 });
+
 
 let port = process.env.PORT || 3000;
 //creates server connection

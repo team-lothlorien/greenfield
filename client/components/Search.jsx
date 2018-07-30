@@ -122,6 +122,7 @@ class Search extends React.Component {
     this.setState({location: event.target.value});
   }
 
+  //clear the input fields after submit
   clearInputFields() {
     this.setState({
       location: '',
@@ -175,7 +176,7 @@ class Search extends React.Component {
 }
 
 
-//The following data should be in its own file, but we ran out of time to refactor.
+//The following data should be in its own file and exported, but we ran out of time to refactor.
 const languages = [ { name: 'Mandarin Chinese' },
 { name: 'Spanish' },
 { name: 'English' },
