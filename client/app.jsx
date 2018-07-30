@@ -155,7 +155,7 @@ class App extends React.Component {
     // if (this.state.loggedIn) {
     //   this.saveDoctor(doctor);
     // } else {
-      this.setState({doctors: [doctor], storedDocs: this.state.doctors});
+    this.setState({doctors: [doctor], storedDocs: this.state.doctors});
     //}
   }
 
