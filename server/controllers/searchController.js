@@ -6,6 +6,7 @@ module.exports = {
   get: (req, res) => {
     let query = req.query.term;
     let location = req.query.location;
+    //accepts location string and returns location by lat and long
     loc.findLocation(location)
     .then(data => {
       if(data === undefined) return null;

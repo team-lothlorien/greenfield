@@ -1,7 +1,7 @@
 const apiHelper = require('../apiHelpers/findSpecialties');
 
 module.exports = {
-  //returns search result of doctors array
+  //returns a list of specialties in an array
   get: (req, res) => {
     apiHelper.findSpecialties()
     .then(sepcialties => res.status(200).send(sepcialties))
