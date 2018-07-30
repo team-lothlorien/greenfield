@@ -1,6 +1,19 @@
 const config = require('../config');
 const axios = require('axios');
 
+/*
+google geocoding api must have an address like
+address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+
+this is what the formatLocationData does
+it converts the parameter 'searchValue' from the users input
+and changes it to a string seperated by '+' and ',' in order to 
+be inserted into the url.
+
+It can take any city name, state, or physical address and convert 
+it to latitude and longitude.
+*/
+
 let formatLocationData = (searchValue) => {
   let formatArr = [];
   let format = searchValue.split(',');

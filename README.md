@@ -19,7 +19,10 @@
 1. [Contributing](#contributing)
 
 ## Usage
-
+### server/apiHelpers
+contains the calls to our two apis
+betterdoctors.com
+maps.googleapis.com/maps/api/geocode
 ## Requirements
 
 ## Development
