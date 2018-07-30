@@ -51,6 +51,7 @@ app.use('/location', locationRouter);
 
 
 //Authentication
+//data is coming from 
 app.post('/signup', (req, res) => {
   let saltRounds = 10;
   let username = req.body.username;

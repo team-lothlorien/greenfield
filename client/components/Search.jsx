@@ -6,13 +6,18 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //selection from the drop down menu
       filterCurrentlySelected: 'Symptoms',
-      // term: '',
+      //text from the location field
       location: '',
+      //array is populated with the strings from autoSuggest
       Data: [],
+      //text from the search field
       value: '',
+      //array is populated with the strings from autoSuggest
       suggestions: []
     };
+
 
     this.onFilterChange = this.onFilterChange.bind(this);
     this.clearInputFields = this.clearInputFields.bind(this);
@@ -26,11 +31,16 @@ class Search extends React.Component {
     this.getSuggestions = this.getSuggestions.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
   }
-
+  //ensures the autosuggest is working when site is launched
   componentDidMount() {
     this.getConditions(this.state.filterCurrentlySelected);
   }
 
+  //function to populate the autosuggest
+  //val argument is the value the of the currently selected drop down,
+  //an object is found at the bottom of this page that converts the newValue
+  //to a server path (except for languages, which is an array at the bottom of this page)
+  //the server path makes an API call to fill the autosuggest
   getConditions(val) {
     if (val === 'Language') {
 
@@ -53,6 +63,8 @@ class Search extends React.Component {
   }
 
   //***********AUTOSUGGEST**********************//
+  //runs a series of tests on the input of the search bar, that then populates the
+  //suggestions array in state. For more info search for React-AutoSuggest
 
   escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -94,6 +106,11 @@ class Search extends React.Component {
     });
   }
 
+  //********************END OF AUTOSUGGEST*****************//
+
+
+  //sets state to the value of the drop down, and then, because of asyncronicty
+  //we wrap the getConditions(server/api call) so to populate the autosuggest box accurately.
   onFilterChange(event) {
     this.setState({ filterCurrentlySelected: event.target.value }, () => this.getConditions(this.state.filterCurrentlySelected));
 
@@ -114,13 +131,14 @@ class Search extends React.Component {
   }
 
   render() {
+    //AUTOSUGGEST
     const { value, suggestions } = this.state;
     const inputProps = {
       placeholder: 'Search by keyword...',
       value,
       onChange: this.onSuggestChange
     };
-
+    //DROP DOWN
     let filterOptions = ['Symptoms', 'Specialties', 'Language', 'Insurance'];
     let filterList = filterOptions.map(item => {
       return (
@@ -156,6 +174,8 @@ class Search extends React.Component {
   }
 }
 
+
+//The following data should be in its own file, but we ran out of time to refactor.
 const languages = [ { name: 'Mandarin Chinese' },
 { name: 'Spanish' },
 { name: 'English' },
