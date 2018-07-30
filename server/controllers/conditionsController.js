@@ -1,7 +1,7 @@
 const apiHelper = require('../apiHelpers/findConditions');
 
 module.exports = {
-  //returns search result of doctors array
+  //returns list of conditons from api fetch as an array of strings
   get: (req, res) => {
     apiHelper.findConditions()
     .then(data => data.data.data.map(condition => condition.name))

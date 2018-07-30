@@ -17,14 +17,14 @@ let saveFavorites = (username, doctorNPI, doctorData) => {
     }
   })
 };
-
+//gets favirutes from db
 let getFavorites = (username) => {
   return db('Favorites')
   .where('username', username)
   .select()
   .table('Favorites')
 };
-
+//deletes favorites from db
 let deleteFavorites = (username, doctorNPI) => {
   return db('Favorites')
   .where({

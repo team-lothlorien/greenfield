@@ -28,7 +28,7 @@ let formatLocationData = (searchValue) => {
   return formatString;
 };
 
-
+//gets location and returns lat, long
 module.exports.findLocation = function (locationQuery) {
   let location = formatLocationData(locationQuery);
   let url = `https://maps.googleapis.com/maps/api/geocode/json?key=${config.API_KEY_GEO}&address=`;

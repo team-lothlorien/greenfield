@@ -1,7 +1,7 @@
 const commentsModel = require('../models/commentsModel')
 
 module.exports = {
-  //returns search result of doctors array
+  //returns comments for specific doctorId (NPI)
   get: (req, res) => {
     commentsModel.getComments(req.query.doctorId)
     .then(comments => res.status(200).send(comments))
@@ -10,6 +10,7 @@ module.exports = {
       .send(console.error('Error fetching comments: ', err))
     })
   },
+  //adds comments to specific doctor by doctorId, username, comment
   post: (req, res) => {
     commentsModel.saveComments(req.body.doctorId, req.body.username, req.body.comment)
     .then(res.sendStatus(201))
@@ -18,11 +19,13 @@ module.exports = {
       res.status().send(err);
     });
   },
+  //future functinality
   // put: (req, res) => {
   //   commentsModel.editComments()
   //   .then(res.sendStatus(200))
   //   .catch(err => res.send(err))
   // },
+  //deletes comment by username and doctorId
   delete: (req, res) => {
     commentsModel.deleteComments(req.body.username, req.body.doctorId)
     .then(deletion => {

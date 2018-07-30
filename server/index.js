@@ -38,7 +38,7 @@ app.use(session({
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-
+//added routers for each endpoint which can be found in the routes folder
 app.use('/search', searchRouter);
 app.use('/specialties', specialtyRouter);
 app.use('/insurance', insuranceRouter);
@@ -86,7 +86,7 @@ app.post('/signup', (req, res) => {
 });
 
 
-
+//handles login post request
 app.post('/login', (req, response) => {
   let username = req.body.username;
   let password = req.body.password;
@@ -117,7 +117,7 @@ app.post('/login', (req, response) => {
   .catch(err => console.log('ERROR CAUGHT:', err));
 });
 
-
+//handles query posts and saves it into the db
 app.post('/queries', (req, res) => {
   knex('Queries').insert({
     usersUsername: req.body.user,
@@ -133,7 +133,7 @@ app.post('/queries', (req, res) => {
 
 
 
-
+//handles logout post, destroys the session
 app.post('/logout', (req, res) => {
   req.session.destroy();
 });
